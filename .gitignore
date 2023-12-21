@@ -23,7 +23,7 @@
 # Go workspace file
 go.work
 
+# vault
 tool/vault/*.json
-tool/vault/config
 tool/vault/file
 tool/vault/logs
