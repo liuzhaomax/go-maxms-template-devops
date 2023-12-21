@@ -14,11 +14,9 @@ import (
 )
 
 const (
-	username  = "liuzhao1"
-	password  = "liuzhao78"
+	username  = "liuzhao"
+	password  = "123456"
 	vaultAddr = "http://127.0.0.1:8200"
-	TOKEN     = "hvs.MUT9lFPIUdTbafLaovT5bTK1"
-	TOKEN1    = "hvs.CAESIABDu07W6mYiMoID4VI1XFzTjUUkeEN8HFBMTgpEt0abGh4KHGh2cy5RWldEREpxRUdoeEtEdlg5V3JhNGh2TTI"
 )
 
 var httpClient = &http.Client{
@@ -65,7 +63,7 @@ func main() {
 
 	// Set the token for subsequent requests
 	client.SetToken(token)
-	client.SetNamespace("cn/corp/nonprod/depa/go-maxms-template-me/sit/secrets")
+	client.SetNamespace("dev")
 	kvPath := "kv"
 	ctx := context.Background()
 
