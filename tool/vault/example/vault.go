@@ -67,6 +67,17 @@ func main() {
 	kvPath := "kv"
 	ctx := context.Background()
 
+	// Write a secret
+	//secretData := map[string]interface{}{
+	//	"jwt_secret": "987654",
+	//}
+	//_, err = client.KVv2(kvPath).Put(ctx, client.Namespace(), secretData)
+	//if err != nil {
+	//	log.Fatalf("unable to write secret: %v", err)
+	//}
+	//
+	//fmt.Println("Secret written successfully.")
+
 	// Make a read request to Vault
 	secret, err := client.KVv2(kvPath).Get(ctx, client.Namespace())
 	if err != nil {
