@@ -1,10 +1,10 @@
 # 计划
 
 ## 1. 负载均衡
-云+Nginx
+云 + Nginx
 
 ## 2. 网关和鉴权
-微服务+RSA+JWT
+微服务 + RSA + JWT + Hashicorp Vault
 
 ## 3. 注册中心
 ETCD
