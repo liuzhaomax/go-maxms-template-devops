@@ -6,6 +6,37 @@
 ## 2. 网关和鉴权
 微服务 + RSA + JWT + Hashicorp Vault
 
+鉴权准则：
+1. 确保token时效性
+2. 确保黑客使用别人的token登录，会因IP不一致无效
+3. 确保csrf防御
+
+鉴权判定：
+1. 请求IP和token中的IP一致
+2. token是否过期
+
+鉴权方式：
+
+第一种：
+
+未登录：<br>
+app -> SGW：返回公钥字符串 -> 主页微服务：返回主页公开数据<br>
+开始登录：<br>
+app -> SGW -> 用户微服务：判定用户是否成功 -> 用户微服务：返回判定结果，成功则返回jwt -> SGW：将返回的Bearer token存入Authorisation -> 主页微服务：返回主页数据 -> SGW：拼接主页数据与公钥加密的token，并返回 -> app：加载主页 <br>
+已登录：<br>
+app -> SGW：查看Authorisation，鉴权 -> downstream：返回数据<br>
+
+第二种：
+
+用户微服务启动时生成RSA密钥对，并存入vault，如果vault已有密钥对，则获取 <br>
+其他微服务启动时从vault获取RSA密钥对 <br>
+未登录： <br>
+app -> 主页微服务：返回公钥字符串 -> 返回主页公开数据 <br>
+开始登录： <br>
+app -> 主页微服务：请求鉴权 -> 用户微服务：鉴权，返回token -> 主页微服务：拼接主页数据与token，并返回 -> app：加载主页 <br>
+已登录： <br>
+app -> 主页微服务：鉴权，返回数据 <br>
+
 ## 3. 注册中心
 ETCD
 
