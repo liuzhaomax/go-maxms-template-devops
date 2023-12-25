@@ -17,31 +17,35 @@
 
 鉴权方式：
 
+用户微服务启动时生成RSA密钥对，并存入vault，如果vault已有密钥对，则获取 <br>
+其他微服务启动时从vault获取RSA密钥对 <br>
+
 第一种：
 
-未登录：<br>
-app -> SGW：返回公钥字符串 -> 主页微服务：返回主页公开数据<br>
-开始登录：<br>
-app -> SGW -> 用户微服务：判定用户是否成功 -> 用户微服务：返回判定结果，成功则返回jwt -> SGW：将返回的Bearer token存入Authorisation -> 主页微服务：返回主页数据 -> SGW：拼接主页数据与公钥加密的token，并返回 -> app：加载主页 <br>
-已登录：<br>
-app -> SGW：查看Authorisation，鉴权 -> downstream：返回数据<br>
+1. 未登录：<br>
+app -> SGW：返回公钥字符串 -> 主页微服务：返回主页公开数据 <br>
+2. 开始登录：<br>
+![](diagram/登录.drawio.png)
++ 只要鉴权失败，就都跳转登录页面，且返回公钥，且返回之前请求的路径
++ 如果之前没有鉴权，即直接进入登录页面登录，而不是直接进入登录后可见的页面，则失败返回公钥和空路径，跳转登录页面
++ 只要进入登录页面，就返回公钥
+3. 已登录：<br>
+app -> SGW：查看Authorisation，鉴权 -> downstream：返回数据 <br>
 
 第二种：
 
-用户微服务启动时生成RSA密钥对，并存入vault，如果vault已有密钥对，则获取 <br>
-其他微服务启动时从vault获取RSA密钥对 <br>
-未登录： <br>
+1. 未登录： <br>
 app -> 主页微服务：返回公钥字符串 -> 返回主页公开数据 <br>
-开始登录： <br>
+2. 开始登录： <br>
 app -> 主页微服务：请求鉴权 -> 用户微服务：鉴权，返回token -> 主页微服务：拼接主页数据与token，并返回 -> app：加载主页 <br>
-已登录： <br>
+3. 已登录： <br>
 app -> 主页微服务：鉴权，返回数据 <br>
 
 ## 3. 注册中心
 ETCD
 
 ## 4. 配置中心
-Nacos
+ETCD/Nacos
 
 ## 5. 监控中心
 Prometheus+Grafana/Kibana
