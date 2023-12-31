@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  db:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    restart: always
+    privileged: true
+    volumes:
+      - ./redis-data:/data
