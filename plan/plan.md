@@ -4,7 +4,8 @@
 云 + Nginx
 
 ## 2. 网关和鉴权
-微服务 + RSA + JWT + Hashicorp Vault
+JWT + RSA + Hashicorp Vault
+接口签名 + redis + Hashicorp Vault
 
 鉴权准则：
 1. 确保token时效性
