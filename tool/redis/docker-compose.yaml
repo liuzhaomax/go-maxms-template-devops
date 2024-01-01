@@ -8,4 +8,9 @@ services:
     restart: always
     privileged: true
     volumes:
-      - ./redis-data:/data
+      - ./redis-data:/data  # Redis 数据存储目录
+      - ./redis-conf:/usr/local/etc/redis  # Redis 配置文件目录
+      - ./redis-logs:/var/log/redis  # Redis 日志目录
+    environment:
+      - REDIS_PASSWORD=123456  # 设置 Redis 密码
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]

@@ -27,10 +27,12 @@ go.work
 
 # vault
 tool/vault/*.json
-tool/vault/file
+tool/vault/data
 tool/vault/logs
+tool/vault/file
+tool/vault/user-logs
+tool/vault/config/tls
 
 # redis
 tool/redis/redis-data
 tool/redis/redis-logs
-tool/redis/redis-conf

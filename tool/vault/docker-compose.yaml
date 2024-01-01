@@ -1,22 +1,24 @@
 version: "3.8"
+
 services:
-  vault-server:
+  vault:
     image: hashicorp/vault
     container_name: vault
     ports:
-      - 8200:8200
+      - "8200:8200"
     restart: always
     privileged: true
     volumes:
-      - ./logs:/vault/logs
-      - ./file:/vault/file
       - ./config:/vault/config
+      - ./logs:/vault/logs
+      - ./data:/vault/data
     environment:
-#      - VAULT_DEV_ROOT_TOKEN_ID=root-token
-#      - VAULT_DEV_LISTEN_ADDRESS=127.0.0.1:8200
-      - VAULT_ADDR=http://127.0.0.1:8200
+      - VAULT_ADDR=http://127.0.0.1:8200 # dev
       - VAULT_API_ADDR=http://0.0.0.0:8200
       - VAULT_CLUSTER_ADDR=http://0.0.0.0:8201
+#      - VAULT_ADDR=https://127.0.0.1:8200 # prod
+#      - VAULT_API_ADDR=https://0.0.0.0:8200
+#      - VAULT_CLUSTER_ADDR=https://0.0.0.0:8201
     cap_add:
       - IPC_LOCK
     entrypoint: vault server -config=/vault/config/vault_dev.json

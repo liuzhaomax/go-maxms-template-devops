@@ -1,20 +1,21 @@
 {
-  "listener": [{
-    "tcp": {
-      "address": "0.0.0.0:8200",
-      "tls_disable": 0,
-      "tls_cert_file": "/path/to/tls_cert.pem",
-      "tls_key_file": "/path/to/tls_key.pem"
-    }
-  }],
-  "storage": [{
+  "ui": true,
+  "storage": {
     "file": {
       "path": "/vault/data"
     }
-  }],
+  },
+  "listener": {
+    "tcp": {
+      "address": "0.0.0.0:8200",
+      "cluster_addr": "0.0.0.0:8201",
+      "tls_disable": false,
+      "tls_key_file": "/vault/config/tls/vault.key",
+      "tls_cert_file": "/vault/config/tls/vault.crt"
+    }
+  },
+  "api_addr": "https://0.0.0.0:8200",
   "log_level": "info",
   "log_file": "/vault/logs/vault.log",
-  "api_addr": "https://0.0.0.0:8200",
-  "cluster_addr": "https://0.0.0.0:8201",
-  "ui": true
+  "plugin_directory": "/vault/plugins"
 }
