@@ -29,3 +29,8 @@ go.work
 tool/vault/*.json
 tool/vault/file
 tool/vault/logs
+
+# redis
+tool/redis/redis-data
+tool/redis/redis-logs
+tool/redis/redis-conf
