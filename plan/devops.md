@@ -36,6 +36,15 @@
     * [7.2 配置JOB](#72-job)
   * [8. 安装数据库 - MySQL](#8----mysql)
   * [9. 安装内存数据库 - Redis](#9----redis)
+  * [10. 域名](#10-)
+    * [10.1 购买域名](#101-)
+    * [10.2 备案](#102-)
+    * [10.3 解析域名](#103-)
+    * [10.4 SSL证书](#104-ssl)
+  * [11. 安装网关 - Nginx](#11----nginx)
+  * [12. 安装Vault - Hashicorp Vault](#12-vault---hashicorp-vault)
+    * [12.1 部署](#121-)
+    * [12.2 配置](#122-)
 <!-- TOC -->
 
 ## 1. 准备工作
@@ -623,6 +632,7 @@ docker-compose up -d
 > https://wanwang.aliyun.com/
 
 ### 10.2 备案
+域名指向国内服务器，不备案域名不能访问
 > https://beian.aliyun.com/
 
 ### 10.3 解析域名
@@ -654,32 +664,31 @@ docker-compose up -d
 
 等待签发，成功会有邮件通知，下载证书
 
-
-
-
-
-
+> HTTPS 相关配置
+> https://help.aliyun.com/zh/ssl-certificate/user-guide/install-ssl-certificates-on-nginx-servers-or-tengine-servers
 
 
 ## 11. 安装网关 - Nginx
 
-版本
-
+版本1.25.3
 ```shell
 # 建立目录
 cd docker
 mkdir nginx
 # 拷贝docker-compose.yaml
 # 启动
-cd nginx
+cd /root/docker/nginx
 docker-compose up -d
 # conf文件
-cd /root/nginx
-# 拷贝 conf
-
+cd /root/nginx/conf.d
+# 拷贝 *.conf
+# tls
+cd /root/nginx/tls
+# 拷贝.pem .key
+# 重启nginx
+docker restart nginx
 ```
-
-
+> https://<域名>  测试验证配置是否成功
 
 
 ## 12. 安装Vault - Hashicorp Vault
@@ -772,3 +781,5 @@ TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
 + Harbor定时删除SNAPSHOT的image
 + 增加create package和deploy package，简化流水线
++ nginx https
++ vault https [做到该修改密码那步]
