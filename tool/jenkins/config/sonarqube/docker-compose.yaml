@@ -1,0 +1,41 @@
+version: "3.1"
+services:
+  sonar_db:
+    image: postgres
+    container_name: sonar_db
+    privileged: true
+    restart: always
+    user: root
+    ports:
+      - 5432:5432
+    networks:
+      - sonarnet
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+  sonarqube:
+    image: sonarqube:10.3.0-community
+    container_name: sonarqube
+    privileged: true
+    restart: always
+    user: sonarqube # 不要使用root，es不允许以root身份运行
+    depends_on:
+      - sonar_db
+    ports:
+      - 9001:9000
+    networks:
+      - sonarnet
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://sonar_db:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    volumes:
+      - '/root/tools/node/bin/node:/usr/bin/node'
+      - '/root/tools/node/bin/npm:/usr/bin/npm'
+      - '/root/tools/node/bin/npx:/usr/bin/npx'
+      - '/root/tools/go/bin/go:/usr/bin/go'
+      - '/usr/bin/docker:/usr/bin/docker'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+networks:
+  sonarnet:
+    driver: bridge

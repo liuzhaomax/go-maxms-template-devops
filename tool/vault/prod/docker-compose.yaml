@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  vault:
+    image: hashicorp/vault
+    container_name: vault
+    ports:
+      - "8200:8200"
+    restart: always
+    privileged: true
+    volumes:
+      - /root/vault/config:/vault/config
+      - /root/vault/logs:/vault/logs
+      - /root/vault/data:/vault/data
+    environment:
+      - VAULT_ADDR=https://106.15.185.10:8200
+      - VAULT_API_ADDR=https://0.0.0.0:8200
+      - VAULT_CLUSTER_ADDR=https://0.0.0.0:8201
+    cap_add:
+      - IPC_LOCK
+    entrypoint: vault server -config=/vault/config/vault_prod.json

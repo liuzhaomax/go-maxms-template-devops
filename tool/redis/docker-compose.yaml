@@ -1,16 +1,16 @@
-version: "3.8"
+version: "3.3"
 services:
   db:
     image: redis
-    container_name: redis
+    container_name: redis_master
     ports:
       - 6379:6379
     restart: always
     privileged: true
     volumes:
-      - ./redis-data:/data  # Redis 数据存储目录
-      - ./redis-conf:/usr/local/etc/redis  # Redis 配置文件目录
-      - ./redis-logs:/var/log/redis  # Redis 日志目录
+      - /root/redis/redis-data:/data  # Redis 数据存储目录
+      - /root/redis/redis-conf:/usr/local/etc/redis  # Redis 配置文件目录
+      - /root/redis/redis-logs:/var/log/redis  # Redis 日志目录
     environment:
       - REDIS_PASSWORD=123456  # 设置 Redis 密码
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]

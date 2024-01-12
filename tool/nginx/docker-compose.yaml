@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    restart: always
+    privileged: true
+    volumes:
+      - /root/nginx/conf.d:/etc/nginx/conf.d
+      - /root/nginx/tls:/etc/nginx/certs
+      - /root/nginx/html:/usr/share/nginx/html
+      - /root/nginx/log:/var/log/nginx

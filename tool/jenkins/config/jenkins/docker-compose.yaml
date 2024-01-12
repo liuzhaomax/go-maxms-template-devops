@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  jenkins:
+    image: 'jenkins/jenkins:latest'
+    container_name: jenkins
+    privileged: true
+    restart: always
+    user: root
+    ports:
+      - '9000:8080'
+      - '50000:50000'
+    volumes:
+      - /root/docker/jenkins_docker/data:/var/jenkins_home
+      - /usr/bin/docker:/usr/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/tools/node/bin/node:/usr/bin/node
+      - /root/tools/go/bin/go:/usr/bin/go
+      - /root/docker/harbor_docker/daemon.json:/etc/docker/daemon.json
