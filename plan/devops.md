@@ -882,7 +882,7 @@ vault write auth/userpass/users/liuzhao password="123456"
 
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
-+ Harbor定时删除SNAPSHOT的image
++ Harbor定时删除SNAPSHOT的image，PR merge后，自动删除PR的image
 + 增加create package和deploy package，简化流水线
 + nginx https
 + vault https [做到该修改密码那步]
