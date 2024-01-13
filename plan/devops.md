@@ -729,6 +729,7 @@ cd /root/docker/redis
 docker-compose up -d
 ```
 
+
 ## 10. 域名
 
 ### 10.1 购买域名
