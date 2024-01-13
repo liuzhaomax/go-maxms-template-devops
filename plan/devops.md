@@ -577,17 +577,120 @@ tree -L 3 -I '.*' /root
 `GitHub Pull Request Builder`
 
 ### 7.2 配置JOB
+`Dashboard` → `"User"` → `Configuration` → 找到`API Token` → 点击`Add new Token`，生成并复制
+
+![生成jenkinsAPIToken.png](devops/生成jenkinsAPIToken.png)
+
 `Dashboard` → `Configure System`，找到`GitHub Pull Request Builder`
 
+将生成的token，粘贴到`Shared secret`，并按下图填写，图中的credential是github access token，在github中生成
 
+![PRBuilder.png](devops/PRBuilder.png)
 
+测试是否连通
 
+![测试PRbuilder连通.png](devops/测试PRbuilder连通.png)
 
+### 7.3 配置webhook
+找到需要加入jenkins验证的repo → `Settings` → `Webhooks` → `Add Webhook`，如图填写
 
+secret，即jenkins API token，即shared secret
 
+![webhook.png](devops/webhook.png)
 
+选择图中的 `individual events` → 选上`pull request`
 
+![webhookPR.png](devops/webhookPR.png)
 
+成功后显示`√`，见下图
+![webhook成功.png](devops/webhook成功.png)
+
+如果报错403
++ 检查secret是否一致
++ 检查hook地址，ip和路径
++ 检查最后是否以`/`结尾
+
+### 7.4 配置repo添加rule
+`Github`某repo → `Settings` → `Branches` → `Add Rule` 如图填写
+
+![分支规则PR.png](devops/分支规则PR.png)
+
+![分支规则状态检查.png](devops/分支规则状态检查.png)
+
+在repo的`Settings` → `General`中，配置PR通用规则，只允许 squash merging，merge后自动删除branch
+
+![配置PR通用规则.png](devops/配置PR通用规则.png)
+
+如果没有搜索框，请到repo中添加workflow
+
+> 只有status check通过，且至少有1个review，且code owner必须review，才能merge
+
+### 7.5 添加jenkins检查
+使用插件`GitHub App` 将jenkins加入到PR status check中
+
+> https://www.youtube.com/watch?v=aDmeeVDrp0o&t=1100s
+
+进入Github用户`Settings` → `Developer settings` → `GitHub Apps` → `New GitHub App`
+
+按上面链接填写
++ Home URL (Jenkins地址)
++ Webhook URL
++ Repository Permission
+  + Administration: Read-only
+  + Checks: Read & Write
+  + Contents: Read-only
+  + Metadata: Read-only
+  + Pull requests: Read-only
+  + Commit status: Read & Write
+  + Webhook: 如果需要jenkins controller管理webhook，则Read & Write，不需要就no access
++ Subscribe to events
+  + Check run
+  + Check suite
+  + Pull request
+  + Push
+  + Repository
++ 其他默认
+
+提交后，下拉找到`Private keys` → `Generate a private key`
+
+下载后转化pem 
+```shell
+openssl pkcs8 -topk8 -inform PEM -outform PEM \
+  -in jenkins-go-maxms.2024-01-13.private-key.pem \
+  -out converted-github-app.pem -nocrypt
+```
+
+将创建的Github App安装到账户中，如下图
+
+![安装githubApp.png](devops/安装githubApp.png)
+
+![安装githubApp2.png](devops/安装githubApp2.png)
+
+来到Jenkins
+
+`Dashboard` → `Manage Jenkins` → `Credentials` → `System` → `Global credentials (unrestricted)` → `Add Credential`
+
+按图填写，注意名称保持一致
+
+![增加jenkinsGithubApp密钥.png](devops/增加jenkinsGithubApp密钥.png)
+
+App ID 是下图这个ID，Key是转化后的pem
+
+![AppID.png](devops/AppID.png)
+
+测试成功即可
+
+来到 Multibranch Job 的 config，为 Multibranch Job 添加 Credential
+
+注意：这里删除了Git source，使用了Github source
+
+![为MultibranchJob添加Credential.png](devops/为MultibranchJob添加Credential.png)
+
+如果有需要，在repo的settings的branch中添加这个APP为required
+
+成功后显示
+
+![状态检查成功.png](devops/状态检查成功.png)
 
 
 ## 8. 安装数据库 - MySQL

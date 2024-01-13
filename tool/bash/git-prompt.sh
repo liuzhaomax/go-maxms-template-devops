@@ -36,7 +36,7 @@ else
 	fi
 	PS1="$PS1"'\[\033[37m\]'     # 指下一行的颜色白色
 	PS1="$PS1"'\n'               # new line
-	PS1="$PS1"'❥ '
+	PS1="$PS1"'=> '
 fi
 
 MSYS2_PS1="$PS1"               # for detection by MSYS2 SDK's bash.basrc
