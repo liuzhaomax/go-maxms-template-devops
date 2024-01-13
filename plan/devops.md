@@ -580,7 +580,7 @@ tree -L 3 -I '.*' /root
 `Dashboard` → `Configure System`，找到`GitHub Pull Request Builder`
 
 
-TODO  和 vault
+
 
 
 
