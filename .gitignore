@@ -45,5 +45,9 @@ tool/redis/redis-logs
 tool/nginx/tls
 
 # etcd
-tool/etcd/etcd-data
-tool/etcd/etcd-logs
+tool/etcd/node0/etcd-data
+tool/etcd/node0/etcd-logs
+tool/etcd/node1/etcd-data
+tool/etcd/node1/etcd-logs
+tool/etcd/node2/etcd-data
+tool/etcd/node2/etcd-logs

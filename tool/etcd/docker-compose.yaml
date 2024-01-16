@@ -1,9 +1,9 @@
 version: '3.3'
 
 services:
-  etcd:
+  etcd0:
     image: quay.io/coreos/etcd:v3.5.5
-    container_name: etcd
+    container_name: etcd0
     ports:
       - "2379:2379"
       - "2380:2380"
@@ -11,9 +11,40 @@ services:
     privileged: true
     command:
       - /usr/local/bin/etcd
-      - --config-file=./etcd-conf/etcd0.yaml
+      - --config-file=/etcd-conf/etcd0.yaml
     volumes:
-      - ./etcd-data:/etcd-data
-      - ./etcd-logs:/etcd-logs
-      - ./etcd-conf:/etcd-conf
+      - ./node0/etcd-data:/etcd-data
+      - ./node0/etcd-logs:/etcd-logs
+      - ./node0/etcd-conf:/etcd-conf
 
+  etcd1:
+    image: quay.io/coreos/etcd:v3.5.5
+    container_name: etcd1
+    ports:
+      - "12379:12379"
+      - "12380:12380"
+    restart: always
+    privileged: true
+    command:
+      - /usr/local/bin/etcd
+      - --config-file=/etcd-conf/etcd1.yaml
+    volumes:
+      - ./node1/etcd-data:/etcd-data
+      - ./node1/etcd-logs:/etcd-logs
+      - ./node1/etcd-conf:/etcd-conf
+
+  etcd2:
+    image: quay.io/coreos/etcd:v3.5.5
+    container_name: etcd2
+    ports:
+      - "22379:22379"
+      - "22380:22380"
+    restart: always
+    privileged: true
+    command:
+      - /usr/local/bin/etcd
+      - --config-file=/etcd-conf/etcd2.yaml
+    volumes:
+      - ./node2/etcd-data:/etcd-data
+      - ./node2/etcd-logs:/etcd-logs
+      - ./node2/etcd-conf:/etcd-conf
