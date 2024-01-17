@@ -883,7 +883,21 @@ vault write auth/userpass/users/liuzhao password="123456"
 
 版本3.5.5
 
+拷贝etcd目录（不包含数据与日志）到服务器，注意修改ip和端口，运行docker-compose
 
+启动后，进入容器，查看状态
+
+```shell
+# 集群情况检查
+etcdctl endpoint health --cluster -w table
+etcdctl endpoint status --cluster -w table
+# 查看集群健康检查情况
+etcdctl member list --write-out=table 
+# 本节点运行状态
+etcdctl endpoint status --write-out=table 
+# 本节点健康状况
+etcdctl endpoint health --write-out=table 
+```
 
 
 TODO：
