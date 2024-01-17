@@ -15,7 +15,7 @@ advertise-client-urls: http://127.0.0.1:2379
 initial-advertise-peer-urls: http://127.0.0.1:2380
 
 # 集群成员
-initial-cluster: etcd-node0=http://127.0.0.1:2380,etcd-node1=http://127.0.0.1:12380,etcd-node2=http://127.0.0.1:22380
+initial-cluster: etcd-node0=http://127.0.0.1:2380
 # 引导期etcd初始集群令牌，防止不同集群之间产生交互
 initial-cluster-token: etcd-cluster
 # 初始化集群状态 new 或 existing 如果为已有集群增加节点，使用existing

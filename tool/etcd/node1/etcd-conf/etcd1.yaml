@@ -10,12 +10,12 @@ listen-client-urls: http://0.0.0.0:12379
 listen-peer-urls: http://0.0.0.0:12380
 
 # 客户端服务端点 列出这个成员的客户端URL，通告给集群中的其他成员
-advertise-client-urls: http://127.0.0.1:12379
+advertise-client-urls: http://106.15.185.10:12379
 # 集群配置URL 列出这个成员的伙伴 URL 以便通告给集群的其他成员
-initial-advertise-peer-urls: http://127.0.0.1:12380
+initial-advertise-peer-urls: http://106.15.185.10:12380
 
 # 集群成员
-initial-cluster: etcd-node0=http://127.0.0.1:2380,etcd-node1=http://127.0.0.1:12380,etcd-node2=http://127.0.0.1:22380
+initial-cluster: etcd-node0=http://106.15.185.10:2380,etcd-node1=http://106.15.185.10:12380,etcd-node2=http://106.15.185.10:22380
 # 引导期etcd初始集群令牌，防止不同集群之间产生交互
 initial-cluster-token: etcd-cluster
 # 初始化集群状态 new 或 existing 如果为已有集群增加节点，使用existing
