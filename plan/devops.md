@@ -873,8 +873,6 @@ export VAULT_ADDR='https://宿主机IP:8200'
 export VAULT_ADDR='https://106.15.185.10:8200'
 # 如果遇到 permission denied
 export VAULT_TOKEN="123456"
-
-openssl req -out vault.crt -new -keyout vault.key -newkey rsa:4096 -nodes -sha256 -x509 -subj "/C=US/ST=State/L=Location/O=HashiCorp/CN=Vault" -addext "subjectAltName = IP:106.15.185.10" -days 3650
 # 修改密码
 vault write auth/userpass/users/liuzhao password="123456"
 ```

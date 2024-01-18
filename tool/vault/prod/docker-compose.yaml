@@ -13,7 +13,7 @@ services:
       - /root/vault/logs:/vault/logs
       - /root/vault/data:/vault/data
     environment:
-      - VAULT_ADDR=https://106.15.185.10:8200
+      - VAULT_ADDR=https://vault.liuzhaomax.cn
       - VAULT_API_ADDR=https://0.0.0.0:8200
       - VAULT_CLUSTER_ADDR=https://0.0.0.0:8201
     cap_add:
