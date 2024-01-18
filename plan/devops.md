@@ -464,8 +464,7 @@ vi /root/tools/harbor/harbor.yml
 初始帐号密码是：admin Harbor12345
 ```shell
 # 创建harbor容器
-cd /root/tools/harbor
-sudo ./install.sh
+sudo /root/tools/harbor/install.sh
 ```
 
 创建一个新项目 - 图中Project Name就是github项目名，不带branch
@@ -759,6 +758,8 @@ docker-compose up -d
 ![购买SSL证书.png](devops/购买SSL证书.png)
 
 在返回页面 → 找到`免费证书` → `创建证书`
+
+> 注意：由于是免费证书，不能使用通配符，一个证书对应一个子域名
 
 ![申请SSL证书.png](devops/申请SSL证书.png)
 
