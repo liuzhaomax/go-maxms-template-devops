@@ -34,6 +34,9 @@
   * [7. PR触发CI](#7-prci)
     * [7.1 安装插件](#71-)
     * [7.2 配置JOB](#72-job)
+    * [7.3 配置webhook](#73-webhook)
+    * [7.4 配置repo添加rule](#74-reporule)
+    * [7.5 添加jenkins检查](#75-jenkins)
   * [8. 安装数据库 - MySQL](#8----mysql)
   * [9. 安装内存数据库 - Redis](#9----redis)
   * [10. 域名](#10-)
@@ -45,6 +48,7 @@
   * [12. 安装Vault - Hashicorp Vault](#12-vault---hashicorp-vault)
     * [12.1 部署](#121-)
     * [12.2 配置](#122-)
+  * [13. 安装ETCD - quay.io/coreos/etcd](#13-etcd---quayiocoreosetcd)
 <!-- TOC -->
 
 ## 1. 准备工作
@@ -87,6 +91,8 @@ docker container prune -f
 docker image prune -f
 # 重启docker，清理内存
 sudo systemctl restart docker
+# 从外部查看容器内部环境变量（无法进入容器时）
+docker inspect --format '{{range .Config.Env}}{{println .}}{{end}}' go-maxms_main
 ```
 
 
@@ -716,6 +722,15 @@ mkdir mysql
 # 拷贝docker-compose.yaml
 cd mysql
 docker-compose up -d
+```
+
+```shell
+# 建立数据库
+docker exec -it mysql_master sh
+mysql -u root -p
+show databases;
+create database go_maxms;
+show databases;
 ```
 
 
