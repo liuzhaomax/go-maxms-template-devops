@@ -884,7 +884,6 @@ path "kv/data/app/*" {
 docker exec -it vault sh
 # 如果地址不对
 export VAULT_ADDR='https://宿主机IP:8200'
-export VAULT_ADDR='https://106.15.185.10:8200'
 # 如果遇到 permission denied
 export VAULT_TOKEN="123456"
 # 修改密码
