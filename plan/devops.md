@@ -317,6 +317,20 @@ cp -rf /root/tools/go /root/docker/jenkins_docker/data
 
 > CI与CD的区别是流水线Config Selection步骤，需要用户进入console点击最后一行进行选择，CI使用默认选项，默认1分钟选择时间
 
+如果checkout出现错误，报github.com timeout、refused、couldn't connect
+```shell
+# linux 进入jenkins容器，绕过DNS
+docker exec -it jenkins sh
+echo " 140.82.113.3  github.com" >> /etc/hosts
+
+# windows 查询设置-网络-代理-手动设置代理，地址填127.0.0.1，端口填33210（随意，但保持一致），然后如下配置git
+git config --global http.proxy http://127.0.0.1:33210/
+git config --global https.proxy https://127.0.0.1:33210/
+# 不起作用，可清除代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
 
 ## 5. 安装流水线工具
 
@@ -942,6 +956,5 @@ etcdctl put --lease=6e1e86f4c6512a3e foo1 bar1
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
 + Harbor定时删除SNAPSHOT的image，PR merge后，自动删除PR的image
-+ 增加create package和deploy package，简化流水线
-+ nginx https
-+ vault https [做到该修改密码那步]
++ 增加create package和deploy package，简化CD流水线
+
