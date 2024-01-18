@@ -898,6 +898,46 @@ etcdctl endpoint status --write-out=table
 etcdctl endpoint health --write-out=table 
 ```
 
+常用命令
+```shell
+# 数据操作
+etcdctl put key value
+etcdctl get key 
+etcdctl del key 
+
+# 删除成员
+etcdctl member add etcd4 --peer-urls=http://192.168.10.100:12380
+etcdctl member update b112a60ec305e42a --peer-urls=http://192.168.10.100:22380
+etcdctl member remove b112a60ec305e42a
+
+# 查看所有告警
+etcdctl alarm list
+# 解除所有告警
+etcdctl alarm disarm
+
+# 对某个key监听操作，当key1发生改变时，会返回最新值
+etcdctl watch name
+# 监听key前缀
+etcdctl watch name --prefix
+# 监听到改变后执行相关操作
+etcdctl watch name --  etcdctl get age
+
+# 租约 多key可共用一个租约
+# 查看所有租约
+etcdctl lease list
+# 查看某个租约过期时间
+etcdctl lease timetolive --keys 6e1e86f4c6512a32
+# 续约
+etcdctl lease keep-alive 6e1e86f4c6512a36
+# 删除 
+etcdctl lease revoke 6e1e86f4c6512a39
+# 设置过期时间 期外查询键值为空
+etcdctl lease grant 60
+etcdctl put --lease=6e1e86f4c6512a29 foo bar
+# 绑定租约 租约过期后，所有 key 值都会被删除
+etcdctl put --lease=6e1e86f4c6512a3e foo1 bar1
+```
+
 
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
