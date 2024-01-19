@@ -731,6 +731,9 @@ mysql -u root -p
 show databases;
 create database go_maxms;
 show databases;
+# 如果遇到权限问题
+grant all privileges on go_maxms.* to root;
+flush privileges;
 ```
 
 
