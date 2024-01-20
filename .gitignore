@@ -51,3 +51,13 @@ tool/etcd/node1/etcd-data
 tool/etcd/node1/etcd-logs
 tool/etcd/node2/etcd-data
 tool/etcd/node2/etcd-logs
+
+# etcd
+tool/consul/node0/consul-data
+tool/consul/node0/consul-logs
+tool/consul/node1/consul-data
+tool/consul/node1/consul-logs
+tool/consul/node2/consul-data
+tool/consul/node2/consul-logs
+tool/consul/node3/consul-data
+tool/consul/node3/consul-logs

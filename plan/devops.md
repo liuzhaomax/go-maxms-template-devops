@@ -970,6 +970,15 @@ etcdctl put --lease=6e1e86f4c6512a3e foo1 bar1
 ```
 
 
+## 14. 安装Consul
+
+版本1.15.4
+
+拷贝etcd目录到服务器，删除数据目录，运行docker-compose
+
+启动后，进入容器，查看状态
+
+
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
 + Harbor定时删除SNAPSHOT的image，PR merge后，自动删除PR的image
