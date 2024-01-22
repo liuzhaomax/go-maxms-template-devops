@@ -974,7 +974,7 @@ etcdctl put --lease=6e1e86f4c6512a3e foo1 bar1
 
 版本1.15.4
 
-拷贝etcd目录到服务器，删除数据目录，运行docker-compose
+拷贝consul目录到服务器，删除数据目录，运行docker-compose
 
 启动后，进入容器，查看状态
 
