@@ -4,7 +4,7 @@ services:
   consul0:
     image: consul:1.15.4
     container_name: consul0
-    command: "agent -server -bind=0.0.0.0 -bootstrap-expect=3 -ui -client=0.0.0.0"
+    command: agent -server -bind=0.0.0.0 -bootstrap-expect=3 -client=0.0.0.0 -ui
     restart: always
     privileged: true
     ports:
@@ -15,7 +15,7 @@ services:
   consul1:
     image: consul:1.15.4
     container_name: consul1
-    command: "agent -server -bind=0.0.0.0 -join=consul0 -client=0.0.0.0"
+    command: agent -server -bind=0.0.0.0 -join=consul0 -client=0.0.0.0
     restart: always
     privileged: true
     volumes:
@@ -25,8 +25,8 @@ services:
 
   consul2:
     image: consul:1.15.4
-    container_name: "consul2"
-    command: "agent -server -bind=0.0.0.0 -join=consul0 -client=0.0.0.0"
+    container_name: consul2
+    command: agent -server -bind=0.0.0.0 -join=consul0 -client=0.0.0.0
     restart: always
     privileged: true
     volumes:
@@ -36,11 +36,12 @@ services:
 
   consul3:
     image: consul:1.15.4
-    container_name: "consul3"
-    command: "agent -bind=0.0.0.0 -join=consul0 -client=0.0.0.0"
+    container_name: consul3
+    command: agent -server -bind=0.0.0.0 -join=consul0 -client=0.0.0.0
     restart: always
     privileged: true
     volumes:
       - ./node3/consul-data:/consul/data
     depends_on:
-      - consul0
+      - consul1
+      - consul2
