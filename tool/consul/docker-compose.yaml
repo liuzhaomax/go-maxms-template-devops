@@ -4,46 +4,43 @@ services:
   consul0:
     image: hashicorp/consul:1.11.2
     container_name: consul0
-    command: agent -server -bind=0.0.0.0 -bootstrap-expect=3 -client=0.0.0.0
-    restart: always
-    privileged: true
-    volumes:
-      - ./node0/consul-data:/consul/data
-
-  consul1:
-    image: hashicorp/consul:1.11.2
-    container_name: consul1
-    command: agent -server -bind=0.0.0.0 -join=consul0 -client=0.0.0.0
-    restart: always
-    privileged: true
-    volumes:
-      - ./node1/consul-data:/consul/data
-    depends_on:
-      - consul0
-
-  consul2:
-    image: hashicorp/consul:1.11.2
-    container_name: consul2
-    command: agent -server -bind=0.0.0.0 -join=consul0 -client=0.0.0.0
-    restart: always
-    privileged: true
-    volumes:
-      - ./node2/consul-data:/consul/data
-    depends_on:
-      - consul0
-
-  consul-client:
-    image: hashicorp/consul:1.11.2
-    container_name: consul-client
-    command: agent -bind=0.0.0.0 -join=consul0 -client=0.0.0.0 -ui
+    command: agent -bootstrap-expect=3
     restart: always
     privileged: true
     ports:
       - "8500:8500"
-      - "8600:8600/udp"
       - "8600:8600/tcp"
+      - "8600:8600/udp"
+    volumes:
+      - ./node0/consul-data:/consul/data
+      - ./node0/consul-conf/server.json:/consul/config/server.json:ro
+
+  consul1:
+    image: hashicorp/consul:1.11.2
+    container_name: consul1
+    command: agent -bootstrap-expect=3
+    restart: always
+    privileged: true
+    volumes:
+      - ./node1/consul-data:/consul/data
+      - ./node1/consul-conf/server.json:/consul/config/server.json:ro
+
+  consul2:
+    image: hashicorp/consul:1.11.2
+    container_name: consul2
+    command: agent -bootstrap-expect=3
+    restart: always
+    privileged: true
+    volumes:
+      - ./node2/consul-data:/consul/data
+      - ./node2/consul-conf/server.json:/consul/config/server.json:ro
+
+  consul3:
+    image: hashicorp/consul:1.11.2
+    container_name: consul3
+    command: agent
+    restart: always
+    privileged: true
     volumes:
       - ./node3/consul-data:/consul/data
-    depends_on:
-      - consul1
-      - consul2
+      - ./node3/consul-conf/client.json:/consul/config/client.json:ro

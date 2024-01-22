@@ -978,6 +978,34 @@ etcdctl put --lease=6e1e86f4c6512a3e foo1 bar1
 
 启动后，进入容器，查看状态
 
+> 健康检查使用内网IP，本地不要使用127.0.0.1或localhost
+
+> https://developer.hashicorp.com/consul/tutorials/docker/docker-compose-datacenter
+
+ACL引导令牌
+```json
+{
+  "acl": {
+    "enabled": true,
+    "default_policy": "deny",
+    "down_policy": "extend-cache",
+    "enable_token_persistence": true
+  }
+}
+```
+
+```shell
+# 所有节点如下操作
+# 复制到指定目录
+docker cp consul-acl.json consul0:/consul/config/consul-acl.json
+ocker restart consul0
+docker exec -it consul0 sh    
+consul acl bootstrap   
+# SecretID就是令牌 如 69c23123-983b-af6c-8706-db511ac77f80
+export CONSUL_HTTP_TOKEN=69c23123-983b-af6c-8706-db511ac77f80
+consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
+```
+
 
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
