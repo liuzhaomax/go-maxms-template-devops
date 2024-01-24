@@ -73,7 +73,7 @@ MySQL
 OCP4
 
 ## 限流 熔断 降级
-resilience4j/Sentinel/查找其他go熔断降级工具
+resilience4j/Sentinel/查找其他go熔断降级工具 IT老齐
 
 ## CI/CD
 Jenkins流水线
