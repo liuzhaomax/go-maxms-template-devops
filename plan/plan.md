@@ -1,9 +1,9 @@
 # 计划
 
-## 1. 负载均衡
+## 负载均衡
 云 + Nginx
 
-## 2. 网关和鉴权
+## 网关和鉴权
 JWT + RSA + Hashicorp Vault
 接口签名 + redis + Hashicorp Vault
 
@@ -42,37 +42,40 @@ app -> 主页微服务：请求鉴权 -> 用户微服务：鉴权，返回token 
 3. 已登录： <br>
 app -> 主页微服务：鉴权，返回数据 <br>
 
-## 3. 注册中心
-ETCD
+## 注册中心
+ETCD/Consul
 
-## 4. 配置中心
+## 配置中心
 ETCD/Nacos
 
-## 5. 监控中心
-Prometheus+Grafana/Kibana
+## 监控中心
+Prometheus+Grafana
 
-## 6. 日志中心
-Jaeger/fileBeat+Logstash日志链路追踪，ElasticSearch持久化
+## 链路追踪
+Jaeger
 
-## 7. 消息队列
+## 日志中心
+FileBeat+Logstash+Kibana日志分析，ElasticSearch持久化
+
+## 消息队列
 RocketMQ
 
-## 8. 分布式事务
+## 分布式事务
 DTM
 
-## 9. 缓存
+## 缓存
 Redis
 
-## 10. 数据库
+## 数据库
 MySQL
 
-## 11. 集群
+## 集群
 OCP4
 
-## 12. 限流 熔断 降级
+## 限流 熔断 降级
 resilience4j/Sentinel/查找其他go熔断降级工具
 
-## 13. CI/CD
+## CI/CD
 Jenkins流水线
 1. checkout
 2. app version
@@ -87,9 +90,9 @@ Jenkins流水线
 11. create package
 12. deploy package
 
-## 14. 微服务架构
-1. 框架：gin
-2. 通信：grpc
+## 微服务架构
+1. 框架：gin grpc
+2. 通信：http rpc
 3. 依赖注入：wire
 4. 日志：logrus
 5. 拦截器：权限RSA+JWT+crypto，跨域
