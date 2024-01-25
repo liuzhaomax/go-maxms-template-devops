@@ -1007,6 +1007,11 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 ```
 
 
+## 15. 安装Jaeger
+
+版本1.53.0
+
+
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
 + Harbor定时删除SNAPSHOT的image，PR merge后，自动删除PR的image

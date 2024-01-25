@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "5775:5775/udp"    # Agent端口
+      - "6831:6831/udp"    # Agent端口
+      - "6832:6832/udp"    # Agent端口
+      - "5778:5778"        # Collector HTTP端口
+      - "16686:16686"      # Jaeger Web界面端口
+      - "14268:14268"      # Jaeger收集器 (HTTP) 端口
+      - "9411:9411"        # Zipkin兼容的HTTP端口
+    restart: always
+    privileged: true
+    volumes:
+      - ./jaeger-data:/var/lib/jaeger
+      - ./jaeger-logs:/var/log/jaeger
+

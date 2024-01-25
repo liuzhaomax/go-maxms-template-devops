@@ -61,3 +61,7 @@ tool/consul/node2/consul-data
 tool/consul/node2/consul-logs
 tool/consul/node3/consul-data
 tool/consul/node3/consul-logs
+
+# jaeger
+tool/jaeger/jaeger-data
+tool/jaeger/jaeger-logs
