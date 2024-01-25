@@ -1011,6 +1011,9 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 
 版本1.53.0
 
+拷贝jaeger目录到服务器，删除数据目录，运行docker-compose
+
+启动后，进入容器，查看状态
 
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
