@@ -65,3 +65,7 @@ tool/consul/node3/consul-logs
 # jaeger
 tool/jaeger/jaeger-data
 tool/jaeger/jaeger-logs
+
+# prometheus grafana
+tool/prometheus_grafana/prometheus_data
+tool/prometheus_grafana/grafana_data
