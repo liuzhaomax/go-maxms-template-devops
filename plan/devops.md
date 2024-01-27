@@ -1015,6 +1015,20 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 
 启动后，进入容器，查看状态
 
+
+## 16. 安装Prometheus Grafana Alertmanager Cadvisor node_exporter
+
+拷贝prometheus_grafana目录到服务器，删除数据目录，运行docker-compose
+
+启动后，进入容器，查看状态
+
++ Prometheus: 收集监控信息  http://106.15.185.10:9090/
++ Grafana: 监控数据可视化  http://106.15.185.10:3000/
++ Cadvisor: 监控docker容器  8080/tcp
++ Node Exporter: 监控linux  http://106.15.185.10:9100/metrics
++ Alertmanager: 监控报警  http://106.15.185.10:9093/
+
+
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
 + Harbor定时删除SNAPSHOT的image，PR merge后，自动删除PR的image
