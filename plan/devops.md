@@ -1016,7 +1016,7 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 启动后，进入容器，查看状态
 
 
-## 16. 安装Prometheus Grafana Alertmanager Cadvisor node_exporter
+## 16. 安装Prometheus Grafana Alertmanager cAdvisor Node_Exporter
 
 拷贝prometheus_grafana目录到服务器，删除数据目录，运行docker-compose
 
@@ -1024,7 +1024,7 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 
 + Prometheus: 收集监控信息  http://宿主机外网ip:9090/
 + Grafana: 监控数据可视化  http://宿主机外网ip:3000/  帐号 admin
-+ Cadvisor: 监控docker容器  8080/tcp
++ cAdvisor: 监控docker容器  8080/tcp
 + Node Exporter: 监控linux  http://宿主机外网ip:9100/metrics
 + Alertmanager: 监控报警  http://宿主机外网ip:9093/
 
@@ -1059,6 +1059,8 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 ![导入面板选择prometheus.png](devops/导入面板选择prometheus.png)
 
 可以修改这个面板的名称
+
+> 监控其它设施，见prometheus.md
 
 
 
