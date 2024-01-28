@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  nginx_exporter:
+    image: nginx/nginx-prometheus-exporter
+    container_name: nginx-exporter
+    restart: always
+    privileged: true
+    hostname: nginx_exporter
+    ports:
+      - "9113:9113"
+    command:
+      - '-nginx.scrape-uri=http://106.15.185.10/stub_status'

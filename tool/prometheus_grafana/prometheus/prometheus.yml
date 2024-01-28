@@ -40,3 +40,10 @@ scrape_configs:
       - targets: ['node_exporter:9100']
         labels:
           instance: Prometheus服务器
+  # 监控nginx
+  - job_name: 'nginx-exporter'
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['106.15.185.10:9113'] # 不在一个network使用ip地址
+        labels:
+          instance: Prometheus服务器Nginx
