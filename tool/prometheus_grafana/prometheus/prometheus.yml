@@ -47,3 +47,10 @@ scrape_configs:
       - targets: ['106.15.185.10:9113'] # 不在一个network使用ip地址
         labels:
           instance: Prometheus服务器Nginx
+  # 监控go-maxms
+  - job_name: 'go-maxms'
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['106.15.185.10:9200']
+        labels:
+          instance: go-maxmsHTTP服务
