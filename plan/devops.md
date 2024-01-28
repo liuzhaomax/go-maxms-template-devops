@@ -1022,11 +1022,44 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 
 启动后，进入容器，查看状态
 
-+ Prometheus: 收集监控信息  http://106.15.185.10:9090/
-+ Grafana: 监控数据可视化  http://106.15.185.10:3000/
++ Prometheus: 收集监控信息  http://宿主机外网ip:9090/
++ Grafana: 监控数据可视化  http://宿主机外网ip:3000/  帐号 admin
 + Cadvisor: 监控docker容器  8080/tcp
-+ Node Exporter: 监控linux  http://106.15.185.10:9100/metrics
-+ Alertmanager: 监控报警  http://106.15.185.10:9093/
++ Node Exporter: 监控linux  http://宿主机外网ip:9100/metrics
++ Alertmanager: 监控报警  http://宿主机外网ip:9093/
+
+### 16.1 为Grafana添加数据源
+
+进入Grafana，`Home` → `Connections` → `Data sources` → `Add data source`，添加Prometheus
+
+> 如果报错：origin not allowed，检查nginx配置，需要加上特定header
+
+> https://grafana.com/tutorials/run-grafana-behind-a-proxy/#configure-nginx
+
+![grafana添加数据源Prom.png](devops/grafana添加数据源Prom.png)
+
+点击保存
+
+### 16.2 为Grafana添加dashboard
+
+进入Grafana，`Home` → `Dashboards` → `Import dashboard`
+
+进入grafana的dashboards官网，输入node exporter回车
+
+> https://grafana.com/grafana/dashboards
+
+拷贝ID
+
+![NodeExporterFull面板.png](devops/NodeExporterFull面板.png)
+
+粘贴ID
+
+![NodeExporterFull面板粘贴ID.png](devops/NodeExporterFull面板粘贴ID.png)
+
+![导入面板选择prometheus.png](devops/导入面板选择prometheus.png)
+
+可以修改这个面板的名称
+
 
 
 TODO：
