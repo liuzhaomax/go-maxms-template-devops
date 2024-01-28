@@ -1060,7 +1060,7 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 
 可以修改这个面板的名称
 
-> 监控其它设施，见prometheus.md
+> 监控其它exporter，见prometheus.md
 
 
 
