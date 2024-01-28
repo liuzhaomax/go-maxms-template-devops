@@ -49,6 +49,11 @@
     * [12.1 部署](#121-)
     * [12.2 配置](#122-)
   * [13. 安装ETCD - quay.io/coreos/etcd](#13-etcd---quayiocoreosetcd)
+  * [14. 安装Consul](#14-consul)
+  * [15. 安装Jaeger](#15-jaeger)
+  * [16. 安装Prometheus Grafana Alertmanager cAdvisor Node_Exporter](#16-prometheus-grafana-alertmanager-cadvisor-node_exporter)
+    * [16.1 为Grafana添加数据源](#161-grafana)
+    * [16.2 为Grafana添加dashboard](#162-grafanadashboard)
 <!-- TOC -->
 
 ## 1. 准备工作
