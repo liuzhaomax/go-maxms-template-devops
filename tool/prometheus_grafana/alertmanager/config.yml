@@ -6,7 +6,7 @@ global:
   #发邮件的邮箱用户名，也就是你的邮箱　　　　　
   smtp_auth_username: 'alertliuzhaomax@163.com'
   #发邮件的邮箱密码
-  smtp_auth_password: 'LIUZHAOmax123'
+  smtp_auth_password: 'LEJZQTPGUFMDTSPU'
   #进行tls验证
   smtp_require_tls: false
 
