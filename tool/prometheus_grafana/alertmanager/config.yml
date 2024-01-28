@@ -10,8 +10,11 @@ global:
   #进行tls验证
   smtp_require_tls: false
 
+templates:
+  - '/etc/alertmanager/template/*.tmpl'
+
 route:
-  group_by: ['maxblog']
+  group_by: ['alertname']
   # 当收到告警的时候，等待group_wait配置的时间，看是否还有告警，如果有就一起发出去
   group_wait: 10s
   #  如果上次告警信息发送成功，此时又来了一个新的告警数据，则需要等待group_interval配置的时间才可以发送出去
@@ -26,9 +29,11 @@ receivers:
     #收邮件的邮箱
     email_configs:
       - to: 'alertliuzhaomax@163.com'
+        html: '{{ template "email.html" .}}'
+        send_resolved: true
 inhibit_rules:
   - source_match:
       severity: 'critical'
     target_match:
       severity: 'warning'
-    equal: ['maxblog', 'dev', 'instance']
+    equal: ['alertname', 'dev', 'instance']
