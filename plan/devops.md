@@ -108,6 +108,7 @@ docker inspect --format '{{range .Config.Env}}{{println .}}{{end}}' go-maxms_mai
 # 安装包位置
 cd ~
 mkdir pkg
+mkdir tools
 cd pkg
 
 # 解压安装包
