@@ -44,13 +44,13 @@ scrape_configs:
   - job_name: 'nginx-exporter'
     scrape_interval: 15s
     static_configs:
-      - targets: ['106.15.185.10:9113'] # 不在一个network使用ip地址
+      - targets: ['106.15.185.10:9113'] # 不在一个docker-compose network则使用ip地址
         labels:
           instance: Prometheus服务器Nginx
   # 监控go-maxms
   - job_name: 'go-maxms'
     scrape_interval: 15s
     static_configs:
-      - targets: ['106.15.185.10:9200']
+      - targets: ['106.15.94.179:9200']
         labels:
           instance: go-maxmsHTTP服务

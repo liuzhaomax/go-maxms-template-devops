@@ -59,7 +59,7 @@
 ## 1. 准备工作
 
 ### 1.1 云服务器配置
-+ 型号：阿里云ECS
++ 型号：阿里云ECS * 2
 + CPU：2核(必须)
 + 内存：8G(必须)
 + 硬盘：50G
@@ -154,6 +154,19 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-c
 sudo chmod +x /usr/bin/docker-compose
 # 检查安装结果
 docker-compose --version
+
+# 配置远程访问 在被远程访问的服务器上配置
+# https://docs.docker.com/config/daemon/remote-access/
+sudo systemctl edit docker.service
+# 修改为以下内容
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://被远程访问的宿主机ip:2375
+# 重启docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service
+# 查看更改是否成功 - 无值则失败
+sudo netstat -lntp | grep dockerd
 ```
 
 ### 2.3 必备工具 - Jenkins
@@ -184,10 +197,10 @@ cd /root/tools
 cp -r go /root/docker/jenkins_docker/data
 ```
 ```shell
-# 添加daemon.json，为了后面Harbor登录追加仓库地址信息
+# 添加daemon.json，为了后面Harbor登录追加仓库地址信息，在哪部署在哪配置daemon
 sudo vi /etc/docker/daemon.json
 ```
-daemon.json
+这个守护进程配置是为了harbor
 ```json
 {
   "insecure-registries": ["172.16.96.97:9002"]
@@ -334,6 +347,7 @@ cp -rf /root/tools/go /root/docker/jenkins_docker/data
 # linux 进入jenkins容器，绕过DNS
 docker exec -it jenkins sh
 echo " 140.82.113.3  github.com" >> /etc/hosts
+docker exec -it jenkins cat /etc/hosts
 
 # windows 查询设置-网络-代理-手动设置代理，地址填127.0.0.1，端口填33210（随意，但保持一致），然后如下配置git
 git config --global http.proxy http://127.0.0.1:33210/

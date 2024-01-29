@@ -16,3 +16,4 @@ services:
       - /root/tools/node/bin/node:/usr/bin/node
       - /root/tools/go/bin/go:/usr/bin/go
       - /root/docker/harbor_docker/daemon.json:/etc/docker/daemon.json
+      - /root/ssh:/var/ssh
