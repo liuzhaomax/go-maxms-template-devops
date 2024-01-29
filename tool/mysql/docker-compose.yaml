@@ -8,9 +8,9 @@ services:
     restart: always
     privileged: true
     volumes:
-      - /root/mysql/data:/var/lib/mysql
-      - /root/mysql/logs:/logs
-      - /root/mysql/config:/etc/mysql/conf.d
+      - ./data:/var/lib/mysql
+      - ./logs:/logs
+      - ./config:/etc/mysql/conf.d
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     command:
