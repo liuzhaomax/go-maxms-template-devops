@@ -197,7 +197,7 @@ cd /root/tools
 cp -r go /root/docker/jenkins_docker/data
 ```
 ```shell
-# 添加daemon.json，为了后面Harbor登录追加仓库地址信息，在哪部署在哪配置daemon
+# 添加daemon.json，为了后面Harbor登录追加仓库地址信息，在哪部署和在哪push到harbor，就在哪配置daemon
 sudo vi /etc/docker/daemon.json
 ```
 这个守护进程配置是为了harbor
@@ -1067,6 +1067,9 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 进入grafana的dashboards官网，输入node exporter回车
 
 > https://grafana.com/grafana/dashboards
+
++ linux - https://grafana.com/grafana/dashboards/1860-node-exporter-full/
++ nginx - https://grafana.com/grafana/dashboards/12708-nginx/
 
 拷贝ID
 
