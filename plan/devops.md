@@ -161,7 +161,7 @@ sudo systemctl edit docker.service
 # 修改为以下内容
 [Service]
 ExecStart=
-ExecStart=/usr/bin/dockerd -H fd:// -H tcp://被远程访问的宿主机ip:2375
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://被远程访问的宿主机内网ip:2375
 # 重启docker
 sudo systemctl daemon-reload
 sudo systemctl restart docker.service
