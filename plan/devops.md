@@ -98,6 +98,9 @@ docker image prune -f
 sudo systemctl restart docker
 # 从外部查看容器内部环境变量（无法进入容器时）
 docker inspect --format '{{range .Config.Env}}{{println .}}{{end}}' go-maxms_main
+# 更改服务器名称
+sudo hostnamectl set-hostname max000002
+sudo reboot
 ```
 
 
