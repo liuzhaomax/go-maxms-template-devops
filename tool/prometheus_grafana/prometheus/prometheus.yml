@@ -40,20 +40,20 @@ scrape_configs:
       - targets: ['node_exporter:9100']
         labels:
           instance: Prometheus服务器
-      - targets: ['106.15.94.179:9100']
+      - targets: ['172.16.96.98:9100']
         labels:
           instance: 微服务服务器
   # 监控nginx
   - job_name: 'nginx-exporter'
     scrape_interval: 15s
     static_configs:
-      - targets: ['106.15.185.10:9113'] # 不在一个docker-compose network则使用ip地址
+      - targets: ['172.16.96.97:9113'] # 不在一个docker-compose network则使用ip地址
         labels:
           instance: Prometheus服务器Nginx
   # 监控go-maxms
   - job_name: 'go-maxms'
     scrape_interval: 15s
     static_configs:
-      - targets: ['106.15.94.179:9200']
+      - targets: ['172.16.96.98:9999']
         labels:
           instance: go-maxmsHTTP服务

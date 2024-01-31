@@ -1086,6 +1086,15 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 > 监控其它exporter，见prometheus.md
 
 
+## 17. 安装ELK
+
++ FileBeat: 监听系统日志文件更新
++ Logstash: 收集系统日志与app日志
++ Elasticsearch: 日志持久化
++ Kibana: 日志可视化
+
+
+
 
 TODO：
 + 流水线示意图，最后一个格子在Failure的时候变红
