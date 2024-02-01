@@ -69,3 +69,8 @@ tool/jaeger/jaeger-logs
 # prometheus grafana
 tool/prometheus_grafana/prometheus_data
 tool/prometheus_grafana/grafana_data
+
+# elk
+tool/elk/elasticsearch/plugins
+tool/elk/elasticsearch/data
+tool/elk/elasticsearch/logs

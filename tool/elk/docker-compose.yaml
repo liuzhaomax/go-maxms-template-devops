@@ -1,0 +1,62 @@
+version: '3.3'
+
+networks:
+  log:
+    driver: bridge
+
+services:
+  elasticsearch:
+    image: elasticsearch:7.17.17
+    container_name: elasticsearch
+    restart: always
+    privileged: true
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - log
+    environment:
+      cluster.name: elasticsearch
+      discovery.type: single-node # 以单一节点模式启动
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    volumes:
+      - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/logs:/usr/share/elasticsearch/logs
+#      - ./elasticsearch/config:/usr/share/elasticsearch/config # 不要直接挂载，需要挂载后，再拷贝文件，再restart
+
+  kibana:
+    image: kibana:7.17.17
+    container_name: kibana
+    restart: always
+    privileged: true
+    ports:
+      - "5601:5601"
+    networks:
+      - log
+    depends_on:
+      - elasticsearch
+    # environment:
+      # 设置系统语言文中文
+      # I18N_LOCALE: zh-CN
+      # 访问域名
+      # SERVER_PUBLICBASEURL: https://kibana.cloud.com
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+
+  logstash:
+    image: logstash:7.17.17
+    container_name: logstash
+    restart: always
+    privileged: true
+    ports:
+      - "5044:5044"
+    networks:
+      - log
+    depends_on:
+      - elasticsearch
+    environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    volumes:
+      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml

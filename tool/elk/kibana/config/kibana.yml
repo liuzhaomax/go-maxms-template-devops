@@ -1,0 +1,4 @@
+server.host: "0.0.0.0"
+server.shutdownTimeout: "5s"
+elasticsearch.hosts: [ "http://172.16.96.98:9200" ]
+monitoring.ui.container.elasticsearch.enabled: true

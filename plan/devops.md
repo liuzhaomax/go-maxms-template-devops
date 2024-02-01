@@ -1091,10 +1091,31 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 
 ## 17. 安装ELK
 
+拷贝elk目录到服务器，删除数据目录，运行docker-compose
+
+启动后，进入容器，查看状态
+
 + FileBeat: 监听系统日志文件更新
 + Logstash: 收集系统日志与app日志
 + Elasticsearch: 日志持久化
 + Kibana: 日志可视化
+
+如果出现permission denied
+```shell
+sudo chmod -R 777 /root/elk/elasticsearch/logs
+sudo chmod -R 777 /root/elk/elasticsearch/data
+docker restart elasticsearch
+```
+
+如果CPU居高不下
+```shell
+# 追加进程可操作内存边界
+cat >> /etc/sysctl.conf <<-'EOF'
+net.ipv4.ip_forward=1
+vm.max_map_count=655360
+EOF
+sysctl -p
+```
 
 
 
