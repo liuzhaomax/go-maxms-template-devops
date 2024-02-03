@@ -1,0 +1,32 @@
+name: "filebeat"
+logging.metrics.enabled: true
+xpack.security.enabled: false
+xpack.monitoring.enabled: false
+setup.ilm.enabled: false
+setup.template.enabled: false
+
+filebeat.inputs:
+  - type: docker
+    containers.ids:
+      - "*"
+    processors:
+      - add_docker_metadata: ~
+  - type: log
+    scan_frequency: 5s
+    enabled: true
+    paths:
+      - /src/logs/*/*.log*
+    fields:
+      - service: go-maxms
+    fields_under_root: true
+    json:
+      keys_under_root: true
+      overwrite_keys: true
+      message_key: msg
+
+#output.logstash:
+#  hosts: ["172.16.96.98:5044"]
+#  index: go-maxms
+output.elasticsearch:
+  hosts: ["172.16.96.98:9200"]
+  index: filebeat-go-maxms-%{[server_name]}-%{[service_name]}-%{+YYYY.MM.dd}

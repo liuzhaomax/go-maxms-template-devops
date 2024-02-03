@@ -1117,6 +1117,17 @@ EOF
 sysctl -p
 ```
 
+配置跨域
+```shell
+docker exec -it elasticsearch sh
+tee >> /usr/share/elasticsearch/config/elasticsearch.yml <<-'EOF'
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+EOF
+exit
+docker restart elasticsearch
+```
+
 
 
 
