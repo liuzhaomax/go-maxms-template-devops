@@ -1,0 +1,37 @@
+name: "filebeat"
+logging.metrics.enabled: true
+xpack.security.enabled: false
+xpack.monitoring.enabled: false
+setup.ilm.enabled: false
+setup.template.enabled: false
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /src/logs/nginx/access.log* # *为了持续更新
+    fields:
+      log_type: nginx-access
+    tags:
+      - access
+    json.keys_under_root: true
+
+  - type: log
+    enabled: true
+    paths:
+      - /src/logs/nginx/error.log*
+    fields:
+      log_type: nginx-error
+    tags:
+      - error
+    json.keys_under_root: true
+
+output.elasticsearch:
+  hosts: ["172.16.96.98:9200"]
+  indices:
+    - index: "%{[fields.log_type]}-%{+YYYY.MM.dd}"
+      when.contains:
+        log.file.path: /src/logs/nginx/access.log # 没有*
+    - index: "%{[fields.log_type]}-%{+YYYY.MM.dd}"
+      when.contains:
+        log.file.path: /src/logs/nginx/error.log

@@ -1128,6 +1128,31 @@ exit
 docker restart elasticsearch
 ```
 
+重载filebeat
+```shell
+# 先删除filebeat中的索引和索引模式
+# 删除数据，然后重新加载
+rm -rf /root/elk/filebeat/data/*
+docker restart filebeat
+```
+
+如果需要修改nginx日志格式，在总配置的http字段中加入
+```nginx configuration
+log_format json '{ "time_local": "$time_local", '
+    '"remote_addr": "$remote_addr", '
+    '"referer": "$http_referer", '
+    '"request": "$request", '
+    '"status": $status, '
+    '"bytes": $body_bytes_sent, '
+    '"agent": "$http_user_agent", '
+    '"x_forwarded": "$http_x_forwarded_for", '
+    '"up_addr": "$upstream_addr",'
+    '"up_host": "$upstream_http_host",'
+    '"upstream_time": "$upstream_response_time",'
+    '"request_time": "$request_time"'
+  ' }';
+```
+
 
 
 

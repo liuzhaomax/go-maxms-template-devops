@@ -75,5 +75,6 @@ services:
       - kibana
     volumes:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./filebeat/data:/usr/share/filebeat/data
       - /root/logs:/src/logs
     command: [ "-e", "--strict.perms=false" ]

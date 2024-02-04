@@ -74,3 +74,5 @@ tool/prometheus_grafana/grafana_data
 tool/elk/elasticsearch/plugins
 tool/elk/elasticsearch/data
 tool/elk/elasticsearch/logs
+tool/filebeat-nginx/data
+tool/elk/filebeat/data

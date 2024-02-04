@@ -18,15 +18,20 @@ filebeat.inputs:
       - /src/logs/*/*.log*
     fields:
       - service: go-maxms
-    fields_under_root: true
+#    fields_under_root: true
     json:
       keys_under_root: true
       overwrite_keys: true
       message_key: msg
 
-#output.logstash:
-#  hosts: ["172.16.96.98:5044"]
-#  index: go-maxms
 output.elasticsearch:
   hosts: ["172.16.96.98:9200"]
-  index: filebeat-go-maxms-%{[server_name]}-%{[service_name]}-%{+YYYY.MM.dd}
+  index: "%{[service]}-%{+YYYY.MM.dd}"
+#output.elasticsearch:
+#  hosts: ["172.16.96.98:9200"]
+#  index:
+#    default: "go-maxms-%{+YYYY.MM.dd}"
+#    indices:
+#      - index: "nginx-access-%{+YYYY.MM.dd}"
+#        when.equals:
+#          service: "nginx"
