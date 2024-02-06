@@ -1,7 +1,7 @@
 # 计划
 
 ## 负载均衡
-云 + Nginx
+Nginx/Kong(konga)+微服务SGW
 
 ## 网关和鉴权
 JWT + RSA + Hashicorp Vault
@@ -73,7 +73,7 @@ MySQL
 OCP4
 
 ## 限流 熔断 降级
-resilience4j/Sentinel/查找其他go熔断降级工具 IT老齐
+resilience4j/Sentinel
 
 ## CI/CD
 Jenkins流水线
