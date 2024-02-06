@@ -1153,6 +1153,13 @@ log_format json '{ "time_local": "$time_local", '
   ' }';
 ```
 
+## 18. 安装Sentinel-Dashboard
+
+拷贝sentinel目录到服务器，运行docker-compose
+
+启动后，进入容器，查看状态
+
+
 
 
 
