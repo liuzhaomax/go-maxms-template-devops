@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  sentinel:
+    image: bladex/sentinel-dashboard
+    container_name: sentinel
+    restart: always
+    privileged: true
+    environment:
+      - AUTH_USERNAME=sentinel
+      - AUTH_PASSWORD=123456
+    ports:
+      - 8858:8858
