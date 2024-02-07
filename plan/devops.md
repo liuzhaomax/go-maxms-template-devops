@@ -1159,6 +1159,8 @@ log_format json '{ "time_local": "$time_local", '
 
 启动后，进入容器，查看状态
 
+> sentinel-dashboard不支持golang，需要二次开发：需建立与sentinel-dashboard通信的客户端（在config.Sentinel中定义地址），监听dashboard配置变化
+
 
 
 
