@@ -50,10 +50,16 @@ scrape_configs:
       - targets: ['172.16.96.97:9113'] # 不在一个docker-compose network则使用ip地址
         labels:
           instance: Prometheus服务器Nginx
-  # 监控go-maxms
+  # 监控go-maxms 动态port
   - job_name: 'go-maxms'
     scrape_interval: 15s
-    static_configs:
-      - targets: ['172.16.96.98:9999']
-        labels:
-          instance: go-maxmsHTTP服务
+    consul_sd_configs:
+      - server: '172.16.96.97:8500'
+        services:
+          - 'go-maxms'
+#    relabel_configs:
+#      - source_labels: [ __address__ ]
+#        target_label: __param_target
+#        action: replace
+#        regex: '.*'
+#        replacement: '${1}'
