@@ -63,3 +63,16 @@ scrape_configs:
 #        action: replace
 #        regex: '.*'
 #        replacement: '${1}'
+  # 监控maxblog
+  - job_name: 'maxblog-sgw'
+    scrape_interval: 15s
+    consul_sd_configs:
+      - server: '172.16.96.97:8500'
+        services:
+          - 'maxblog-sgw'
+  - job_name: 'maxblog-user'
+    scrape_interval: 15s
+    consul_sd_configs:
+      - server: '172.16.96.97:8500'
+        services:
+          - 'maxblog-user'
