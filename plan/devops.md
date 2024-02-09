@@ -54,6 +54,8 @@
   * [16. 安装Prometheus Grafana Alertmanager cAdvisor Node_Exporter](#16-prometheus-grafana-alertmanager-cadvisor-node_exporter)
     * [16.1 为Grafana添加数据源](#161-grafana)
     * [16.2 为Grafana添加dashboard](#162-grafanadashboard)
+  * [17. 安装ELK](#17-elk)
+  * [18. 安装Sentinel-Dashboard](#18-sentinel-dashboard)
 <!-- TOC -->
 
 ## 1. 准备工作
