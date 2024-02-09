@@ -45,8 +45,8 @@ docker -H tcp://$deployment_server_ip:2375 run \
   --privileged=true \
   -p "${host_port}:${container_port}" \
   -e ENV="${environment}" \
-  -v /root/www:/usr/src/app/www \
-  -v /root/logs/"${project}":/usr/src/app/logs \
+  -v /root/www/"${project}":/usr/src/app/www \
+  -v /root/logs/"${project}":/usr/src/app/log \
   "$imageName"
 
 echo "SUCCESS: Container Created"
