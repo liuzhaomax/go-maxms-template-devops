@@ -18,7 +18,7 @@ services:
   consul1:
     image: hashicorp/consul:1.11.2
     container_name: consul1
-    command: agent -bootstrap-expect=3
+    command: agent
     restart: always
     privileged: true
     volumes:
@@ -28,7 +28,7 @@ services:
   consul2:
     image: hashicorp/consul:1.11.2
     container_name: consul2
-    command: agent -bootstrap-expect=3
+    command: agent
     restart: always
     privileged: true
     volumes:
