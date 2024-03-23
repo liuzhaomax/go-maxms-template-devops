@@ -8,5 +8,8 @@
   "addresses": {
     "http": "0.0.0.0"
   },
-  "retry_join": ["consul1", "consul2"]
+  "retry_join": ["consul1", "consul2"],
+  "connect": {
+    "enabled": true
+  }
 }
