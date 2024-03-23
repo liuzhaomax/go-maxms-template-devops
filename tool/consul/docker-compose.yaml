@@ -4,7 +4,7 @@ services:
   consul0:
     image: hashicorp/consul:1.11.2
     container_name: consul0
-    command: agent -bootstrap-expect=3
+    command: agent -server -bootstrap-expect=3
     restart: always
     privileged: true
     ports:
