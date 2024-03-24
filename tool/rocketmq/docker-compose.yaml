@@ -1,0 +1,69 @@
+version: '3.3'
+
+networks:
+  rocketmq:
+    driver: bridge
+
+services:
+  rocketmqnamesrv:
+    image: rocketmqinc/rocketmq:4.9.4
+    container_name: rocketmq_namesrv
+    hostname: rocketmqnamesrv
+    ports:
+      - "9876:9876"
+    restart: always
+    privileged: true
+    environment:
+      JAVA_OPT_EXT: "-server -Xms1g -Xmx1g"
+    volumes:
+      - ./logs:/root/logs
+    networks:
+      rocketmq:
+        aliases:
+          - rocketmqnamesrv
+    command: sh mqnamesrv
+
+  rocketmqbroker:
+    image: rocketmqinc/rocketmq:4.9.4
+    container_name: rocketmq_broker
+    hostname: rocketmqbroker
+    ports:
+      - "10911:10911"
+      - "10909:10909"
+    restart: always
+    privileged: true
+    environment:
+      NAMESRV_ADDR: namesrv:9876
+      JAVA_OPT_EXT: "-server -Xms1g -Xmx1g"
+    volumes:
+      - ./logs:/root/logs
+      - ./store:/root/store
+      - ./conf/broker.conf:/opt/rocketmq-4.9.4/conf/broker.conf
+    networks:
+      rocketmq:
+        aliases:
+          - rocketmqnamesrv
+    depends_on:
+      - rocketmqnamesrv
+    command: sh mqbroker -n namesrv:9876 -c /opt/rocketmq-4.9.4/conf/broker.conf
+
+  rocketmqconsole:
+    image: styletang/rocketmq-console-ng
+    container_name: rocketmq_console
+    hostname: rocketmqconsole
+    ports:
+      - 9877:8080
+    restart: always
+    privileged: true
+    environment:
+      JAVA_OPT: "-Drocketmq.namesrv.addr=rocketmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./console/logs:/root/logs/console
+    networks:
+      rocketmq:
+        aliases:
+          - rocketmqnamesrv
+    depends_on:
+      - rocketmqnamesrv
+

@@ -76,3 +76,9 @@ tool/elk/elasticsearch/data
 tool/elk/elasticsearch/logs
 tool/filebeat-nginx/data
 tool/elk/filebeat/data
+
+# rocketmq
+tool/rocketmq/logs
+tool/rocketmq/store
+
+
