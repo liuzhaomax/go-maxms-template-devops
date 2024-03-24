@@ -53,6 +53,7 @@ services:
     restart: always
     privileged: true
     environment:
+      NAMESRV_ADDR: "rocketmqnamesrv:9876"
       JAVA_OPT: "-Drocketmq.namesrv.addr=rocketmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
     volumes:
       - /etc/localtime:/etc/localtime:ro

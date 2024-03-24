@@ -1173,6 +1173,10 @@ log_format json '{ "time_local": "$time_local", '
 
 注意：修改broker.conf中的宿主机ip
 
+如果出现`org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to <null> failed`
+
+请检查docker-compose里面有没有环境变量`NAMESRV_ADDR: "rocketmqnamesrv:9876"`
+
 
 
 

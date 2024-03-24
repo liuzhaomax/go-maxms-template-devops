@@ -43,7 +43,7 @@ services:
           - rocketmqbroker
     depends_on:
       - rocketmqnamesrv
-    command: sh mqbroker -n rocketmqnamesrv:9876 -c /opt/rocketmq-4.4.0/conf/broker.conf
+    command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
 
   rocketmqconsole:
     image: styletang/rocketmq-console-ng
@@ -53,7 +53,8 @@ services:
     restart: always
     privileged: true
     environment:
-      JAVA_OPT: "-Drocketmq.namesrv.addr=namesrvAddr:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+      NAMESRV_ADDR: "rocketmqnamesrv:9876"
+      JAVA_OPT: "-Drocketmq.namesrv.addr=rocketmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
     volumes:
 #      - /etc/localtime:/etc/localtime:ro
       - ./logs/console:/root/logs
