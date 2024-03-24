@@ -11,8 +11,9 @@ services:
     ports:
       - "9876:9876"
     restart: always
+    privileged: true
     environment:
-      JAVA_OPT_EXT: "-server -Xms512m -Xmx512m"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m"
     volumes:
       - ./logs:/root/logs
     networks:
@@ -28,9 +29,10 @@ services:
       - "10911:10911"
       - "10909:10909"
     restart: always
+    privileged: true
     environment:
       NAMESRV_ADDR: "rocketmqnamesrv:9876"
-      JAVA_OPT_EXT: "-server -Xms512m -Xmx512m -Xmn512m"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
     volumes:
       - ./logs:/root/logs
       - ./store:/root/store
@@ -41,7 +43,7 @@ services:
           - rocketmqbroker
     depends_on:
       - rocketmqnamesrv
-    command: sh mqbroker -c /opt/rocketmq/conf/broker.conf
+    command: sh mqbroker -n rocketmqnamesrv:9876 -c /opt/rocketmq/conf/broker.conf
 
   rocketmqconsole:
     image: styletang/rocketmq-console-ng
@@ -49,6 +51,7 @@ services:
     ports:
       - 9877:8080
     restart: always
+    privileged: true
     environment:
       JAVA_OPT: "-Drocketmq.namesrv.addr=rocketmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
     volumes:
