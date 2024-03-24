@@ -36,14 +36,14 @@ services:
     volumes:
       - ./logs:/root/logs
       - ./store:/root/store
-      - ./conf/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf
+      - ./conf/broker:/opt/rocketmq-4.4.0/conf/broker # 注意这里和生产环境不同，注意文件夹层级
     networks:
       rocketmq:
         aliases:
           - rocketmqbroker
     depends_on:
       - rocketmqnamesrv
-    command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
+    command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker/broker.conf # 注意这里和生产环境不同，注意文件夹层级
 
   rocketmqconsole:
     image: styletang/rocketmq-console-ng
