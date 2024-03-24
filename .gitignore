@@ -79,7 +79,6 @@ tool/elk/filebeat/data
 
 # rocketmq
 tool/rocketmq/logs
-tool/rocketmq/console
 tool/rocketmq/store
 
 
