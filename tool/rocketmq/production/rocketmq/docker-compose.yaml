@@ -40,7 +40,7 @@ services:
     networks:
       rocketmq:
         aliases:
-          - rocketmqbroker
+          - rocketmqnamesrv
     depends_on:
       - rocketmqnamesrv
     command: sh mqbroker -c /opt/rocketmq/conf/broker.conf
@@ -55,12 +55,12 @@ services:
     environment:
       JAVA_OPT: "-Drocketmq.namesrv.addr=rocketmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
     volumes:
-#      - /etc/localtime:/etc/localtime:ro
+      - /etc/localtime:/etc/localtime:ro
       - ./logs/console:/root/logs
     networks:
       rocketmq:
         aliases:
-          - rocketmqconsole
+          - rocketmqnamesrv
     depends_on:
       - rocketmqnamesrv
 

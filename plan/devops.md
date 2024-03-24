@@ -1165,6 +1165,14 @@ log_format json '{ "time_local": "$time_local", '
 > sentinel-dashboard不支持golang，需要二次开发：需建立与sentinel-dashboard通信的客户端（在config.Sentinel中定义地址），监听dashboard配置变化
 
 
+## 19. 安装RocketMQ
+
+拷贝rocketmq/production/rocketmq目录到目标服务器，运行docker-compose
+
+启动console查看状态
+
+注意：修改broker.conf中的宿主机ip
+
 
 
 
