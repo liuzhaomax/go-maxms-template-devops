@@ -6,7 +6,7 @@ networks:
 
 services:
   rocketmqnamesrv:
-    image: rocketmqinc/rocketmq
+    image: rocketmqinc/rocketmq:4.4.0
     container_name: rocketmq_namesrv
     ports:
       - "9876:9876"
@@ -23,7 +23,7 @@ services:
     command: sh mqnamesrv
 
   rocketmqbroker:
-    image: rocketmqinc/rocketmq
+    image: rocketmqinc/rocketmq:4.4.0
     container_name: rocketmq_broker
     ports:
       - "10911:10911"
@@ -36,14 +36,14 @@ services:
     volumes:
       - ./logs:/root/logs
       - ./store:/root/store
-      - ./conf/broker.conf:/opt/rocketmq/conf/broker.conf
+      - ./conf/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf
     networks:
       rocketmq:
         aliases:
           - rocketmqbroker
     depends_on:
       - rocketmqnamesrv
-    command: sh mqbroker -n rocketmqnamesrv:9876 -c /opt/rocketmq/conf/broker.conf
+    command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
 
   rocketmqconsole:
     image: styletang/rocketmq-console-ng
