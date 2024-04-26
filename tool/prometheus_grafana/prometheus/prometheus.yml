@@ -82,12 +82,12 @@ scrape_configs:
       - server: '172.16.96.97:8500'
         services:
           - 'maxblog-main'
-  - job_name: 'maxblog-stats'
-    scrape_interval: 15s
-    consul_sd_configs:
-      - server: '172.16.96.97:8500'
-        services:
-          - 'maxblog-stats'
+#  - job_name: 'maxblog-stats'
+#    scrape_interval: 15s
+#    static_configs:
+#      - targets: ['172.16.96.98:9090']
+#        labels:
+#          instance: maxblog-stats
   - job_name: 'maxblog-main-fe'
     scrape_interval: 15s
     consul_sd_configs:
