@@ -11,14 +11,27 @@ filebeat.inputs:
       - "*"
     processors:
       - add_docker_metadata: ~
+
   - type: log
     scan_frequency: 5s
     enabled: true
     paths:
-      - /src/logs/*/*.log*
+      - /src/logs/go-maxms*/*.log*  # filebeat容器内路径，注意查看挂载映射
     fields:
       - service: go-maxms
-#    fields_under_root: true
+#    fields_under_root: true # 字段不再嵌套，都移动到root
+    json:
+      keys_under_root: true
+      overwrite_keys: true
+      message_key: msg
+
+  - type: log
+    scan_frequency: 5s
+    enabled: true
+    paths:
+      - /src/logs/maxblog*/*.log*
+    fields:
+      - service: maxblog
     json:
       keys_under_root: true
       overwrite_keys: true
