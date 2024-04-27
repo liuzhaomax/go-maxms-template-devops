@@ -1103,6 +1103,9 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 + Elasticsearch: 日志持久化
 + Kibana: 日志可视化
 
+filebeat.yml
+> https://www.elastic.co/guide/en/beats/filebeat/7.17/filebeat-reference-yml.html
+
 如果出现permission denied
 ```shell
 sudo chmod -R 777 /root/elk/elasticsearch/logs

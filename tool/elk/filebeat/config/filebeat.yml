@@ -4,6 +4,7 @@ xpack.security.enabled: false
 xpack.monitoring.enabled: false
 setup.ilm.enabled: false
 setup.template.enabled: false
+setup.kibana.host: 172.16.96.98:5601
 
 filebeat.inputs:
   - type: docker
@@ -11,10 +12,9 @@ filebeat.inputs:
       - "*"
     processors:
       - add_docker_metadata: ~
-
   - type: log
-    scan_frequency: 5s
     enabled: true
+    scan_frequency: 5s
     paths:
       - /src/logs/go-maxms*/*.log*  # filebeat容器内路径，注意查看挂载映射
     fields:
@@ -24,18 +24,17 @@ filebeat.inputs:
       keys_under_root: true
       overwrite_keys: true
       message_key: msg
-
-  - type: log
-    scan_frequency: 5s
-    enabled: true
-    paths:
-      - /src/logs/maxblog*/*.log*
-    fields:
-      - service: maxblog
-    json:
-      keys_under_root: true
-      overwrite_keys: true
-      message_key: msg
+#  - type: log
+#    enabled: true
+#    scan_frequency: 5s
+#    paths:
+#      - /src/logs/maxblog*/*.log*
+#    fields:
+#      - service: maxblog
+#    json:
+#      keys_under_root: true
+#      overwrite_keys: true
+#      message_key: msg
 
 output.elasticsearch:
   hosts: ["172.16.96.98:9200"]

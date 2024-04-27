@@ -10,6 +10,7 @@ services:
     container_name: elasticsearch
     restart: always
     privileged: true
+    user: root
     ports:
       - "9200:9200"
       - "9300:9300"
