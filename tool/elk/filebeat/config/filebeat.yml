@@ -1,4 +1,4 @@
-name: "filebeat"
+name: filebeat
 logging.metrics.enabled: true
 xpack.security.enabled: false
 xpack.monitoring.enabled: false
