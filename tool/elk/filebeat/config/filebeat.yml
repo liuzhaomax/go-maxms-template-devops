@@ -18,32 +18,39 @@ filebeat.inputs:
     paths:
       - /src/logs/go-maxms*/*.log*  # filebeat容器内路径，注意查看挂载映射
     fields:
-      - service: go-maxms
+      service: go-maxms
 #    fields_under_root: true # 字段不再嵌套，都移动到root
     json:
       keys_under_root: true
       overwrite_keys: true
       message_key: msg
-#  - type: log
-#    enabled: true
-#    scan_frequency: 5s
-#    paths:
-#      - /src/logs/maxblog*/*.log*
-#    fields:
-#      - service: maxblog
-#    json:
-#      keys_under_root: true
-#      overwrite_keys: true
-#      message_key: msg
+  - type: log
+    enabled: true
+    scan_frequency: 5s
+    paths:
+      - /src/logs/maxblog*/*.log*
+    fields:
+      service: maxblog
+    json:
+      keys_under_root: true
+      overwrite_keys: true
+      message_key: msg
 
 output.elasticsearch:
-  hosts: ["172.16.96.98:9200"]
-  index: "%{[service]}-%{+YYYY.MM.dd}"
-#output.elasticsearch:
-#  hosts: ["172.16.96.98:9200"]
-#  index:
-#    default: "go-maxms-%{+YYYY.MM.dd}"
-#    indices:
-#      - index: "nginx-access-%{+YYYY.MM.dd}"
-#        when.equals:
-#          service: "nginx"
+  hosts: [ "172.16.96.98:9200" ]
+  indices:
+    - index: "%{[fields.service]}-%{+YYYY.MM.dd}"
+      when.contains: # 根据事件提交索引，没有走上面的paths
+        log.file.path: /src/logs/go-maxms_main/app.log
+    - index: "%{[fields.service]}-%{+YYYY.MM.dd}"
+      when.contains:
+        log.file.path: /src/logs/maxblog-main_main/app.log
+    - index: "%{[fields.service]}-%{+YYYY.MM.dd}"
+      when.contains:
+        log.file.path: /src/logs/maxblog-user_main/app.log
+    - index: "%{[fields.service]}-%{+YYYY.MM.dd}"
+      when.contains:
+        log.file.path: /src/logs/maxblog-stats_main/app.log
+    - index: "%{[fields.service]}-%{+YYYY.MM.dd}"
+      when.contains:
+        log.file.path: /src/logs/maxblog-sgw_main/app.log
