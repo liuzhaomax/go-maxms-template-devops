@@ -85,7 +85,7 @@ sudo apt upgrade
 ```
 
 ### 1.3 配置云服务网关
-![阿里云网关.png](devops/阿里云网关.png)
+![阿里云网关.png](img/devops/阿里云网关.png)
 如图手动添加，开放所有端口，后面可以自行调整。
 
 ### 1.4 Linux必备命令
@@ -272,7 +272,7 @@ cp -rTf /root/tools/jdk /root/docker/jenkins_docker/data
 ```
 回到浏览器jenkins的`Dashboard` → `Global Tool Configuration` → `JDK` → `Add JDK`，取消自动安装，按下图填写。
 
-![挂载jdk.png](devops/挂载jdk.png)
+![挂载jdk.png](img/devops/挂载jdk.png)
 
 ### 3.4 挂载nodejs
 > 可尝试先删除/root/docker/jenkins_docker/data下的对应文件夹
@@ -281,7 +281,7 @@ cp -rf /root/tools/node /root/docker/jenkins_docker/data
 ```
 回到浏览器jenkins的`Dashboard` → `Global Tool Configuration` → `NodeJS` → `Add NodeJS`，取消自动安装，按下图填写。
 
-![挂载nodejs.png](devops/挂载nodejs.png)
+![挂载nodejs.png](img/devops/挂载nodejs.png)
 
 ### 3.4 挂载go
 > 可尝试先删除/root/docker/jenkins_docker/data下的对应文件夹
@@ -290,12 +290,12 @@ cp -rf /root/tools/go /root/docker/jenkins_docker/data
 ```
 回到浏览器jenkins的`Dashboard` → `Global Tool Configuration` → `Go` → `Add Go`，取消自动安装，按下图填写。
 
-![挂载go.png](devops/挂载go.png)
+![挂载go.png](img/devops/挂载go.png)
 
 ### 3.6 连接代码仓库
 `Dashboard` → `Configure System`，找到`Publish over SSH`，点击`Add`
 
-![连接代码仓库.png](devops/连接代码仓库.png)
+![连接代码仓库.png](img/devops/连接代码仓库.png)
 
 这个username是远程服务器的username，密码和私钥也是连接那个服务器用的。
 
@@ -311,15 +311,15 @@ cp -rf /root/tools/go /root/docker/jenkins_docker/data
 
 找到`Branch Sources` → `Add source` → `Git`
 
-![分支资源.png](devops/分支资源.png)
+![分支资源.png](img/devops/分支资源.png)
 
 在`Branch Sources`下加入这3个
 
-![附加过滤器.png](devops/附加过滤器.png)
+![附加过滤器.png](img/devops/附加过滤器.png)
 
 找到`Build Configuration` → 设置Jenkinsfile的路径，注意：这是repo里的路径和文件名
 
-![Build配置.png](devops/Build配置.png)
+![Build配置.png](img/devops/Build配置.png)
 
 保存后，进行scan，测试repo中的Jenkinsfile
 
@@ -332,7 +332,7 @@ cp -rf /root/tools/go /root/docker/jenkins_docker/data
 
 `Dashboard` → `Configure System`，找到`Global Build Discarders`，点击`Add`
 
-![配置保留任务.png](devops/配置保留任务.png)
+![配置保留任务.png](img/devops/配置保留任务.png)
 
 ### 4.2 运行多分支流水线
 
@@ -419,13 +419,13 @@ vi /root/docker/jenkins_docker/data/sonar-scanner/conf/sonar-project.properties
 + 撤销注释并修改 `sonar.host.url=http://宿主机内网ip:9001`<br/>
 + 撤销UTF-8注释
 
-![sonar-scanner属性设置.png](devops/sonar-scanner属性设置.png)
+![sonar-scanner属性设置.png](img/devops/sonar-scanner属性设置.png)
 
 给sonar-scanner设置token，来到浏览器sonar面板右上角
 
-![sonar-scanner设置token.png](devops/sonar-scanner设置token.png)
+![sonar-scanner设置token.png](img/devops/sonar-scanner设置token.png)
 
-![sonar-scanner生成token.png](devops/sonar-scanner生成token.png)
+![sonar-scanner生成token.png](img/devops/sonar-scanner生成token.png)
 
 > 确保项目根目录下有sonar-project.properties文件，切token等属性已设置
 
@@ -457,7 +457,7 @@ cd /root/docker/jenkins_docker/data/workspace/go-maxms_main
 
 成功会看到：
 
-![sonar-scanner成功.png](devops/sonar-scanner成功.png)
+![sonar-scanner成功.png](img/devops/sonar-scanner成功.png)
 
 #### 5.1.3 安装sonar-scanner - 插件方式（推荐）
 
@@ -466,13 +466,13 @@ jenkins安装SonarQube Scanner插件
 配置插件：
 `Dashboard` → `Configure System`，找到`SonarQube servers`，点击`Add`，注意添加token
 
-![sonar配置.png](devops/sonar配置.png)
+![sonar配置.png](img/devops/sonar配置.png)
 
-![sonar登录令牌.png](devops/sonar登录令牌.png)
+![sonar登录令牌.png](img/devops/sonar登录令牌.png)
 
 `Dashboard` → `Tools`，找到`SonarQube Scanner installations`，点击`Add SonarQube Scanner`
 
-![将sonar加入jenkins.png](devops/将sonar加入jenkins.png)
+![将sonar加入jenkins.png](img/devops/将sonar加入jenkins.png)
 
 ```shell
 # 配置sonar-scanner
@@ -482,13 +482,13 @@ vi /root/docker/jenkins_docker/data/tools/hudson.plugins.sonar.SonarRunnerInstal
 + 撤销注释并修改 `sonar.host.url=http://宿主机内网ip:9001`<br/>
 + 撤销UTF-8注释
 
-![sonar-scanner属性设置.png](devops/sonar-scanner属性设置.png)
+![sonar-scanner属性设置.png](img/devops/sonar-scanner属性设置.png)
 
 给sonar-scanner设置token，来到浏览器sonar面板右上角
 
-![sonar-scanner设置token.png](devops/sonar-scanner设置token.png)
+![sonar-scanner设置token.png](img/devops/sonar-scanner设置token.png)
 
-![sonar-scanner生成token.png](devops/sonar-scanner生成token.png)
+![sonar-scanner生成token.png](img/devops/sonar-scanner生成token.png)
 
 > 确保项目根目录下有sonar-project.properties文件，切token等属性已设置
 
@@ -505,7 +505,7 @@ cp /root/tools/harbor/harbor.yml.tmpl /root/tools/harbor/harbor.yml
 vi /root/tools/harbor/harbor.yml
 ```
 
-![配置harbor.png](devops/配置harbor.png)
+![配置harbor.png](img/devops/配置harbor.png)
 
 初始帐号密码是：admin Harbor12345
 ```shell
@@ -515,7 +515,7 @@ sudo /root/tools/harbor/install.sh
 
 创建一个新项目 - 图中Project Name就是github项目名，不带branch
 
-![Harbor新项目.png](devops/Harbor新项目.png)
+![Harbor新项目.png](img/devops/Harbor新项目.png)
 
 在Jenkinsfile定义变量
 ```
@@ -624,31 +624,31 @@ tree -L 3 -I '.*' /root
 ### 7.2 配置JOB
 `Dashboard` → `"User"` → `Configuration` → 找到`API Token` → 点击`Add new Token`，生成并复制
 
-![生成jenkinsAPIToken.png](devops/生成jenkinsAPIToken.png)
+![生成jenkinsAPIToken.png](img/devops/生成jenkinsAPIToken.png)
 
 `Dashboard` → `Configure System`，找到`GitHub Pull Request Builder`
 
 将生成的token，粘贴到`Shared secret`，并按下图填写，图中的credential是github access token，在github中生成
 
-![PRBuilder.png](devops/PRBuilder.png)
+![PRBuilder.png](img/devops/PRBuilder.png)
 
 测试是否连通
 
-![测试PRbuilder连通.png](devops/测试PRbuilder连通.png)
+![测试PRbuilder连通.png](img/devops/测试PRbuilder连通.png)
 
 ### 7.3 配置webhook
 找到需要加入jenkins验证的repo → `Settings` → `Webhooks` → `Add Webhook`，如图填写
 
 secret，即jenkins API token，即shared secret
 
-![webhook.png](devops/webhook.png)
+![webhook.png](img/devops/webhook.png)
 
 选择图中的 `individual events` → 选上`pull request`
 
-![webhookPR.png](devops/webhookPR.png)
+![webhookPR.png](img/devops/webhookPR.png)
 
 成功后显示`√`，见下图
-![webhook成功.png](devops/webhook成功.png)
+![webhook成功.png](img/devops/webhook成功.png)
 
 如果报错403
 + 检查secret是否一致
@@ -658,13 +658,13 @@ secret，即jenkins API token，即shared secret
 ### 7.4 配置repo添加rule
 `Github`某repo → `Settings` → `Branches` → `Add Rule` 如图填写
 
-![分支规则PR.png](devops/分支规则PR.png)
+![分支规则PR.png](img/devops/分支规则PR.png)
 
-![分支规则状态检查.png](devops/分支规则状态检查.png)
+![分支规则状态检查.png](img/devops/分支规则状态检查.png)
 
 在repo的`Settings` → `General`中，配置PR通用规则，只允许 squash merging，merge后自动删除branch
 
-![配置PR通用规则.png](devops/配置PR通用规则.png)
+![配置PR通用规则.png](img/devops/配置PR通用规则.png)
 
 如果没有搜索框，请到repo中添加workflow
 
@@ -707,9 +707,9 @@ openssl pkcs8 -topk8 -inform PEM -outform PEM \
 
 将创建的Github App安装到账户中，如下图
 
-![安装githubApp.png](devops/安装githubApp.png)
+![安装githubApp.png](img/devops/安装githubApp.png)
 
-![安装githubApp2.png](devops/安装githubApp2.png)
+![安装githubApp2.png](img/devops/安装githubApp2.png)
 
 来到Jenkins
 
@@ -717,11 +717,11 @@ openssl pkcs8 -topk8 -inform PEM -outform PEM \
 
 按图填写，注意名称保持一致
 
-![增加jenkinsGithubApp密钥.png](devops/增加jenkinsGithubApp密钥.png)
+![增加jenkinsGithubApp密钥.png](img/devops/增加jenkinsGithubApp密钥.png)
 
 App ID 是下图这个ID，Key是转化后的pem
 
-![AppID.png](devops/AppID.png)
+![AppID.png](img/devops/AppID.png)
 
 测试成功即可
 
@@ -729,13 +729,13 @@ App ID 是下图这个ID，Key是转化后的pem
 
 注意：这里删除了Git source，使用了Github source
 
-![为MultibranchJob添加Credential.png](devops/为MultibranchJob添加Credential.png)
+![为MultibranchJob添加Credential.png](img/devops/为MultibranchJob添加Credential.png)
 
 如果有需要，在repo的settings的branch中添加这个APP为required
 
 成功后显示
 
-![状态检查成功.png](devops/状态检查成功.png)
+![状态检查成功.png](img/devops/状态检查成功.png)
 
 
 ## 8. 安装数据库 - MySQL
@@ -806,24 +806,24 @@ docker-compose up -d
 
 如果需要子域名转发到特定端口，如下图配置：
 
-![隐式URL配置.png](devops/隐式URL配置.png)
+![隐式URL配置.png](img/devops/隐式URL配置.png)
 
 ### 10.4 SSL证书
 > https://www.aliyun.com/product/cas
 
 点击`选购证书` → 找到`免费证书` → `立即购买`
 
-![购买SSL证书.png](devops/购买SSL证书.png)
+![购买SSL证书.png](img/devops/购买SSL证书.png)
 
 在返回页面 → 找到`免费证书` → `创建证书`
 
 > 注意：由于是免费证书，不能使用通配符，一个证书对应一个子域名
 
-![申请SSL证书.png](devops/申请SSL证书.png)
+![申请SSL证书.png](img/devops/申请SSL证书.png)
 
 根据提示，来到`域名控制台`页面 → `添加记录`，如下图
 
-![SSL证书域名记录.png](devops/SSL证书域名记录.png)
+![SSL证书域名记录.png](img/devops/SSL证书域名记录.png)
 
 等待签发，成功会有邮件通知，下载证书
 
@@ -1062,7 +1062,7 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 
 > https://grafana.com/tutorials/run-grafana-behind-a-proxy/#configure-nginx
 
-![grafana添加数据源Prom.png](devops/grafana添加数据源Prom.png)
+![grafana添加数据源Prom.png](img/devops/grafana添加数据源Prom.png)
 
 点击保存
 
@@ -1079,13 +1079,13 @@ consul acl set-agent-token agent 69c23123-983b-af6c-8706-db511ac77f80
 
 拷贝ID
 
-![NodeExporterFull面板.png](devops/NodeExporterFull面板.png)
+![NodeExporterFull面板.png](img/devops/NodeExporterFull面板.png)
 
 粘贴ID
 
-![NodeExporterFull面板粘贴ID.png](devops/NodeExporterFull面板粘贴ID.png)
+![NodeExporterFull面板粘贴ID.png](img/devops/NodeExporterFull面板粘贴ID.png)
 
-![导入面板选择prometheus.png](devops/导入面板选择prometheus.png)
+![导入面板选择prometheus.png](img/devops/导入面板选择prometheus.png)
 
 可以修改这个面板的名称
 
