@@ -94,6 +94,9 @@ sudo apt upgrade
 sync && echo 3 > /proc/sys/vm/drop_caches
 sysctl -w vm.drop_caches=3
 echo 1 > /proc/sys/vm/drop_caches
+# docker清理缓存
+docker builder prune
+docker system prune -a
 # 清除停掉的容器和镜像
 docker container prune -f
 docker image prune -f
