@@ -1,0 +1,705 @@
+openapi: 3.0.3
+x-stoplight:
+  id: nu516ytwiwdpp
+info:
+  title: Article
+  version: '1.0'
+  description: MaxBlog文章API
+  contact:
+    name: Max
+  license:
+    name: Apache 2.0
+servers:
+  - url: 'http://127.0.0.1:9999'
+    description: 本地
+tags:
+  - name: article
+    description: 文章
+  - name: tag
+    description: 标签
+paths:
+  /maxblog/article/list:
+    get:
+      summary: Get Article List
+      tags:
+        - article
+      responses:
+        '200':
+          $ref: '#/components/responses/200-get-list'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      operationId: get-article-list
+      description: 获取文章列表
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/pageNo'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/tagName'
+        - $ref: '#/components/parameters/search'
+    parameters: []
+  /maxblog/article/article:
+    get:
+      summary: Get Article by ID
+      tags:
+        - article
+      responses:
+        '200':
+          $ref: '#/components/responses/200-get-article-by-id'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      operationId: get-article-by-id
+      description: 获取文章
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/articleId'
+    parameters: []
+    put:
+      summary: Put Article by ID
+      tags:
+        - article
+      operationId: put-article-by-id
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      description: 新增和修改文章
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/articleId'
+        - $ref: '#/components/parameters/User_id'
+      requestBody:
+        $ref: '#/components/requestBodies/Article'
+    delete:
+      summary: Delete Article by ID
+      tags:
+        - article
+      operationId: delete-article-by-id
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      description: 删除文章
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/articleId'
+        - $ref: '#/components/parameters/User_id'
+    patch:
+      summary: Patch Like
+      tags:
+        - article
+      operationId: patch-maxblog-article-article
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      description: 更新点赞数
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/articleId'
+        - $ref: '#/components/parameters/User_id'
+        - $ref: '#/components/parameters/field'
+  /maxblog/article/tag:
+    parameters: []
+    put:
+      summary: Put Tag by Name
+      tags:
+        - tag
+      operationId: put-tag-by-name
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      description: 新增和修改标签
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/tagName'
+        - $ref: '#/components/parameters/User_id'
+    delete:
+      summary: Delete Tag by Name
+      tags:
+        - tag
+      operationId: delete-tag-by-name
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      description: 删除标签
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/tagName'
+        - $ref: '#/components/parameters/User_id'
+  /maxblog/article/tags:
+    get:
+      summary: Get Article Tags
+      tags:
+        - tag
+      responses:
+        '200':
+          $ref: '#/components/responses/200-get-tags'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      operationId: get-article-tags
+      description: 获取标签列表
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+    parameters: []
+  /maxblog/article/article/cover/upload:
+    post:
+      summary: Upload Cover Image
+      tags:
+        - article
+      operationId: post-maxblog-article-article-cover-upload
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      description: 上传文章封面图片
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/User_id'
+        - $ref: '#/components/parameters/articleId'
+      requestBody:
+        $ref: '#/components/requestBodies/CoverImage'
+    parameters: []
+  /maxblog/article/article/content/upload:
+    post:
+      summary: Upload Content Static File
+      tags:
+        - article
+      operationId: post-maxblog-article-article-content-upload
+      responses:
+        '200':
+          $ref: '#/components/responses/200-upload-content-file'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      description: 上传文章封面图片
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/User_id'
+        - $ref: '#/components/parameters/articleId'
+      requestBody:
+        $ref: '#/components/requestBodies/ContentFile'
+    parameters: []
+components:
+  schemas:
+    Status:
+      title: Status
+      x-stoplight:
+        id: 9dwz18t0hmqh2
+      type: object
+      x-examples:
+        Example 1:
+          code: 0
+          desc: success
+      properties:
+        code:
+          type: integer
+        desc:
+          type: string
+    Article:
+      title: Article
+      x-stoplight:
+        id: 17f352103385d
+      type: object
+      description: 文章
+      x-examples:
+        Example 1:
+          createdAt: '2019-08-24T14:15:22Z'
+          updatedAt: '2019-08-24T14:15:22Z'
+          deletedAt: '2019-08-24T14:15:22Z'
+          id: string
+          title: string
+          author: string
+          reference: string
+          link: string
+          view: 0
+          like: 0
+          cover: string
+          content: string
+          tags:
+            - string
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        reference:
+          type: string
+        link:
+          type: string
+        view:
+          type: integer
+          default: 0
+        like:
+          type: integer
+          default: 0
+        cover:
+          type: string
+        content:
+          type: string
+        tags:
+          $ref: '#/components/schemas/Tag'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - title
+        - author
+        - view
+        - like
+    Tag:
+      type: array
+      x-examples:
+        Example 1:
+          tagName: string
+      description: 标签
+      items:
+        type: string
+  responses:
+    '200':
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+          examples:
+            Example 1:
+              value:
+                code: 0
+                desc: success
+    '400':
+      description: 缺少参数
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 400
+                  desc: 缺少参数
+    '401':
+      description: 未授权
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 401
+                  desc: 未授权
+    '500':
+      description: 内部错误
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 500
+                  desc: 内部错误
+    200-get-list:
+      description: 获取文章列表
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 0
+                  desc: string
+                data:
+                  - createdAt: '2019-08-24T14:15:22Z'
+                    updatedAt: '2019-08-24T14:15:22Z'
+                    deletedAt: '2019-08-24T14:15:22Z'
+                    id: string
+                    title: string
+                    author: string
+                    reference: string
+                    link: string
+                    view: 0
+                    like: 0
+                    cover: string
+                    content: string
+                    tags:
+                      - string
+    200-get-tags:
+      description: 获取标签列表
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              data:
+                $ref: '#/components/schemas/Tag'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 0
+                  desc: string
+                data:
+                  - string
+    200-get-article-by-id:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              data:
+                $ref: '#/components/schemas/Article'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 0
+                  desc: string
+                data:
+                  createdAt: '2019-08-24T14:15:22Z'
+                  updatedAt: '2019-08-24T14:15:22Z'
+                  deletedAt: '2019-08-24T14:15:22Z'
+                  id: string
+                  title: string
+                  author: string
+                  reference: string
+                  link: string
+                  view: 0
+                  like: 0
+                  cover: string
+                  content: string
+                  tags:
+                    - string
+    200-upload-content-file:
+      description: 上传文章内容图片返回链接path字符串
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              data:
+                type: string
+                x-stoplight:
+                  id: r2oz119t44i9o
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 0
+                  desc: string
+                data: string
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+  parameters:
+    Client_ip:
+      name: Client_ip
+      in: header
+      required: true
+      schema:
+        type: string
+      description: 用户IP
+    User-Agent:
+      name: User-Agent
+      in: header
+      required: true
+      schema:
+        type: string
+      description: 用户设备
+    Trace_id:
+      name: Trace_id
+      in: header
+      schema:
+        type: string
+      description: trace ID
+      required: true
+    Span_id:
+      name: Span_id
+      in: header
+      schema:
+        type: string
+      description: span ID
+      required: true
+    Parent_id:
+      name: Parent_id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Parent ID
+    App_id:
+      name: App_id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: App ID
+    Request_id:
+      name: Request_id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Request_id
+    Authorization:
+      name: Authorization
+      in: header
+      required: true
+      schema:
+        type: string
+      description: 权限
+    articleId:
+      name: articleId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 文章ID
+    tagName:
+      name: tagName
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 标签名
+    pageNo:
+      name: pageNo
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 页码
+    pageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 页容量
+    User_id:
+      name: User_id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: 用户ID
+    search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 搜索字符串
+    field:
+      name: field
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 字段名
+  requestBodies:
+    Article:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              author:
+                type: string
+              reference:
+                type: string
+              link:
+                type: string
+              view:
+                type: integer
+              like:
+                type: integer
+              cover:
+                type: string
+              content:
+                type: string
+              tags:
+                $ref: '#/components/schemas/Tag'
+            required:
+              - id
+              - title
+              - author
+              - view
+              - like
+          examples:
+            Example 1:
+              value:
+                id: string
+                title: string
+                author: string
+                reference: string
+                link: string
+                view: 0
+                like: 0
+                cover: string
+                content: string
+                tags:
+                  - string
+      description: article请求体
+    CoverImage:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              file:
+                type: string
+                format: binary
+          examples: {}
+      description: 封面图片请求体二进制数据
+    ContentFile:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              file:
+                type: string
+                x-stoplight:
+                  id: oilhztsznuphn
+                format: binary
+      description: 文章内容静态文件

@@ -1,0 +1,184 @@
+openapi: 3.0.0
+x-stoplight:
+  id: dx6duyraujbye
+info:
+  title: Stats
+  version: '1.0'
+  description: Maxblog统计功能API
+  contact:
+    name: Max
+  license:
+    name: Apache 2.0
+servers:
+  - url: 'http://localhost:3000'
+    description: 本地
+tags:
+  - name: stats-main
+    description: 主要统计
+paths:
+  /maxblog/stats/article/main:
+    parameters: []
+    get:
+      summary: 获取文章模块主要统计信息
+      tags:
+        - stats-main
+      operationId: get-maxblog-stats-article-main
+      description: 获取文章模块主要统计信息
+      responses:
+        '200':
+          $ref: '#/components/responses/200-get-stats-article-main'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+components:
+  schemas:
+    Status:
+      title: Status
+      x-stoplight:
+        id: 9dwz18t0hmqh2
+      type: object
+      x-examples:
+        Example 1:
+          code: 0
+          desc: success
+      properties:
+        code:
+          type: integer
+        desc:
+          type: string
+    StatsArticleMain:
+      title: StatsArticleMain
+      x-stoplight:
+        id: g6sftznsdiay4
+      type: object
+      properties:
+        quantity:
+          type: integer
+        view:
+          type: integer
+        like:
+          type: integer
+      x-examples:
+        Example 1:
+          quantity: 0
+          view: 0
+          like: 0
+  responses:
+    '400':
+      description: 缺少参数
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 400
+                  desc: 缺少参数
+    '500':
+      description: 内部错误
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 500
+                  desc: 内部错误
+    200-get-stats-article-main:
+      description: 获取文章主要统计信息
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              data:
+                $ref: '#/components/schemas/StatsArticleMain'
+          examples:
+            Example 1:
+              value:
+                status:
+                  code: 0
+                  desc: string
+                data:
+                  quantity: 0
+                  view: 0
+                  like: 0
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+        multipart/form-data:
+          schema:
+            type: object
+            properties: {}
+  parameters:
+    Client_ip:
+      name: Client_ip
+      in: header
+      required: true
+      schema:
+        type: string
+      description: 用户IP
+    User-Agent:
+      name: User-Agent
+      in: header
+      required: true
+      schema:
+        type: string
+      description: 用户设备
+    Trace_id:
+      name: Trace_id
+      in: header
+      schema:
+        type: string
+      description: trace ID
+      required: true
+    Span_id:
+      name: Span_id
+      in: header
+      schema:
+        type: string
+      description: span ID
+      required: true
+    Parent_id:
+      name: Parent_id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Parent ID
+    App_id:
+      name: App_id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: App ID
+    Request_id:
+      name: Request_id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Request_id
