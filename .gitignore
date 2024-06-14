@@ -37,6 +37,11 @@ tool/vault/user-logs
 tool/vault/config/tls
 tool/vault/prod/tls
 
+# mysql
+tool/mysql/config
+tool/mysql/data
+tool/mysql/logs
+
 # redis
 tool/redis/redis-data
 tool/redis/redis-logs
