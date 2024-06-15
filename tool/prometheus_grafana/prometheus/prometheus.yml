@@ -100,3 +100,10 @@ scrape_configs:
       - server: '172.16.96.97:8500'
         services:
           - 'maxblog-admin-fe'
+# ovo
+  - job_name: 'ovo-sgw'
+    scrape_interval: 15s
+    consul_sd_configs:
+      - server: '172.16.96.97:8500'
+        services:
+          - 'ovo-sgw'
