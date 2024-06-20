@@ -1,10 +1,10 @@
 openapi: 3.0.3
 x-stoplight:
-  id: v8e5aonsa5y6d
+  id: tfyis3dxg7a0d
 info:
   title: user
   version: '1.0'
-  description: MaxBlog用户API
+  description: OvO用户API
   contact:
     name: Max
   license:
@@ -18,7 +18,7 @@ tags:
   - name: login
     description: 登录
 paths:
-  '/users/{userID}':
+  '/user/{userID}':
     parameters:
       - schema:
           type: string
@@ -39,7 +39,7 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
-      operationId: get-users-userID
+      operationId: get-user-userID
       description: Retrieve the information of the user with the matching user ID.
       parameters:
         - $ref: '#/components/parameters/Client_ip'
@@ -49,6 +49,16 @@ paths:
         - $ref: '#/components/parameters/Parent_id'
         - $ref: '#/components/parameters/App_id'
         - $ref: '#/components/parameters/Request_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: string
+                  x-stoplight:
+                    id: lvmk1fb07bwl5
   /login:
     get:
       summary: Get Public Key for Login
@@ -113,6 +123,32 @@ paths:
         - $ref: '#/components/parameters/Parent_id'
         - $ref: '#/components/parameters/App_id'
         - $ref: '#/components/parameters/Request_id'
+  /users:
+    get:
+      summary: 获取用户列表
+      tags:
+        - user
+      responses:
+        '200':
+          $ref: '#/components/responses/200-get-users-list'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      operationId: get-users-list
+      description: 获取用户列表
+      parameters:
+        - $ref: '#/components/parameters/Client_ip'
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Trace_id'
+        - $ref: '#/components/parameters/Span_id'
+        - $ref: '#/components/parameters/Parent_id'
+        - $ref: '#/components/parameters/App_id'
+        - $ref: '#/components/parameters/Request_id'
+      requestBody:
+        content: {}
 components:
   schemas:
     User:
@@ -122,12 +158,17 @@ components:
         Example 1:
           userID: string
           username: string
-          mobile: '+8613012345678'
+          mobile: string
           email: user@example.com
           emailVerified: true
           createdAt: '2023-12-26 23:10:18.938'
           updatedAt: '2023-12-26 23:10:18.938'
           deletedAt: '2023-12-26 23:10:18.938'
+          role: string
+          group:
+            - string
+      x-stoplight:
+        id: k29ishpmkwjli
       properties:
         userID:
           type: string
@@ -157,6 +198,18 @@ components:
           type: string
           format: date-time
           example: '2023-12-26 23:10:18.938'
+        role:
+          type: string
+          x-stoplight:
+            id: jqije9qybwcwi
+        group:
+          type: array
+          x-stoplight:
+            id: 147anmfpugl6j
+          items:
+            x-stoplight:
+              id: b8r38o9ye8ata
+            type: string
       required:
         - userID
         - username
@@ -165,10 +218,11 @@ components:
         - emailVerified
         - createdAt
         - updatedAt
+        - role
     Puk:
       title: Puk
       x-stoplight:
-        id: jyh22u3qnyljy
+        id: 5ykkuhofpf9ej
       type: object
       description: 公钥
       properties:
@@ -180,7 +234,7 @@ components:
     Status:
       title: Status
       x-stoplight:
-        id: 9dwz18t0hmqh2
+        id: hahgrh7gegjee
       type: object
       x-examples:
         Example 1:
@@ -191,6 +245,60 @@ components:
           type: integer
         desc:
           type: string
+    Role:
+      title: Role
+      x-stoplight:
+        id: iw5dmiekin61d
+      type: object
+      properties:
+        role:
+          type: string
+          x-stoplight:
+            id: 52xkhbnm353g1
+        permissions:
+          type: array
+          x-stoplight:
+            id: 3xwtuj8s5d95n
+          items:
+            x-stoplight:
+              id: 7yq3kn0mru047
+            type: string
+      x-examples:
+        Example 1:
+          role: string
+          permissions:
+            - string
+    Group:
+      title: Group
+      x-stoplight:
+        id: 486xucq4ovgzc
+      type: object
+      properties:
+        group:
+          type: string
+          x-stoplight:
+            id: v73xwu4yenlz4
+        parentGroup:
+          type: string
+          x-stoplight:
+            id: a4gdsmgt9p4gi
+      x-examples:
+        Example 1:
+          group: string
+          parentGroup: string
+    Permission:
+      title: Permission
+      x-stoplight:
+        id: 1r6kssmi6pns3
+      type: object
+      properties:
+        permission:
+          type: string
+          x-stoplight:
+            id: opuy64aq28nij
+      x-examples:
+        Example 1:
+          permission: string
   responses:
     '200':
       description: Example response
@@ -264,16 +372,19 @@ components:
               value:
                 status:
                   code: 0
-                  desc: success
+                  desc: string
                 data:
                   userID: string
                   username: string
-                  mobile: '+8612345678'
+                  mobile: string
                   email: user@example.com
                   emailVerified: true
                   createdAt: '2023-12-26 23:10:18.938'
                   updatedAt: '2023-12-26 23:10:18.938'
                   deletedAt: '2023-12-26 23:10:18.938'
+                  role: string
+                  group:
+                    - string
     200-get-login:
       description: Example response
       content:
@@ -311,6 +422,25 @@ components:
                   code: 0
                   desc: success
                 data: token
+    200-get-users-list:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              data:
+                type: array
+                x-stoplight:
+                  id: 36q1vnp6sg4t1
+                items:
+                  $ref: '#/components/schemas/User'
+        application/xml:
+          schema:
+            type: object
+            properties: {}
   parameters:
     Client_ip:
       name: Client_ip
