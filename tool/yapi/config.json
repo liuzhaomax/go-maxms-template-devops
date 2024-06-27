@@ -2,17 +2,17 @@
   "port": "3000",
   "adminAccount": "admin@admin.com",
   "timeout": 120000,
-  "closeRegister": true,
+  "closeRegister": false,
   "db": {
-    "servername": "127.0.0.1",
+    "servername": "192.168.44.17",
     "DATABASE": "yapi",
     "port": 27017,
     "user": "yapi",
     "pass": "yapi123456",
-    "authSource": ""
+    "authSource": "admin"
   },
   "mail": {
-    "enable": true,
+    "enable": false,
     "host": "smtp.gmail.com",
     "port": 465,
     "from": "liuzhaomax1@gmail.com",
