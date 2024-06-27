@@ -86,4 +86,6 @@ tool/elk/filebeat/data
 tool/rocketmq/logs
 tool/rocketmq/store
 
+# yapi
+tool/yapi/mongo_data/
 

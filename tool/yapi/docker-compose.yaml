@@ -1,0 +1,36 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:4.2
+    container_name: yapi-mongo
+    restart: always
+    privileged: true
+    volumes:
+      - ./mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=yapi
+      - MONGO_INITDB_ROOT_USERNAME=yapi
+      - MONGO_INITDB_ROOT_PASSWORD=yapi123456
+    ports:
+      - "27017:27017"
+
+  yapi:
+    image: yapi:latest
+    container_name: yapi
+    ports:
+      - "27018:3000"
+    restart: always
+    privileged: true
+    depends_on:
+      - mongo
+    environment:
+      - YAPI_DB_SERVER=mongo
+      - YAPI_DB_PORT=27017
+      - YAPI_DB_NAME=yapi
+      - YAPI_ADMIN_EMAIL=liuzhaomax@gmail.com
+      - YAPI_ADMIN_PASSWORD=admin
+    volumes:
+      - ./config.json:/yapi/config.json
+
+volumes:
+  mongo_data:
