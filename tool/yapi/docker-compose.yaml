@@ -3,6 +3,10 @@ services:
   mongo:
     image: mongo:4.2
     container_name: yapi-mongo
+    networks:
+      - yapi-network
+    ports:
+      - "27017:27017"
     restart: always
     privileged: true
     volumes:
@@ -11,12 +15,12 @@ services:
       - MONGO_INITDB_DATABASE=yapi
       - MONGO_INITDB_ROOT_USERNAME=yapi
       - MONGO_INITDB_ROOT_PASSWORD=yapi123456
-    ports:
-      - "27017:27017"
 
   yapi:
     image: yapi:latest
     container_name: yapi
+    networks:
+      - yapi-network
     ports:
       - "27018:3000"
     restart: always
@@ -34,3 +38,6 @@ services:
 
 volumes:
   mongo_data:
+
+networks:
+  yapi-network:
