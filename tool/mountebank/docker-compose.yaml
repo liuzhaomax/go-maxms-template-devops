@@ -8,6 +8,7 @@ services:
       - 2525:2525
       - 4545:4545
       - 5555:5555
+      - 11000-11009:11000-11009
     restart: always
     privileged: true
 
