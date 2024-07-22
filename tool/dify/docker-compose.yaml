@@ -562,7 +562,7 @@ services:
     depends_on:
       - api
       - web
-      - open-webui
+#      - open-webui
     ports:
       - "12345:80"
       - "8443:8443"
