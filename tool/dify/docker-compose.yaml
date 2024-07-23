@@ -12,7 +12,7 @@ services:
       # enable DEBUG mode to output more logs
       # DEBUG : true
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
-      SECRET_KEY:
+      SECRET_KEY: 
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
@@ -207,8 +207,8 @@ services:
       # Mount the storage directory to the container, for storing user files.
       - ./volumes/app/storage:/app/api/storage
     # uncomment to expose dify-api port to host
-    # ports:
-    #   - "5001:5001"
+    ports:
+      - "5001:5001"
     networks:
       - ssrf_proxy_network
       - default
@@ -229,7 +229,7 @@ services:
       LOG_LEVEL: INFO
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
       # same as the API service
-      SECRET_KEY:
+      SECRET_KEY: 
       # The configurations of postgres database connection.
       # It is consistent with the configuration in the 'db' service below.
       DB_USERNAME: postgres
@@ -390,8 +390,8 @@ services:
       # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
       SENTRY_DSN: ''
     # uncomment to expose dify-web port to host
-    # ports:
-    #   - "3000:3000"
+    ports:
+      - "3000:3000"
   # The postgres database.
   db:
     image: postgres:15-alpine
@@ -483,9 +483,9 @@ services:
   ssrf_proxy:
     image: ubuntu/squid:latest
     restart: always
-    volumes:
-      # pls clearly modify the squid.conf file to fit your network environment.
-      - ./volumes/ssrf_proxy/squid.conf:/etc/squid/squid.conf
+    #    volumes:
+    # pls clearly modify the squid.conf file to fit your network environment.
+    #      - ./volumes/ssrf_proxy/squid.conf:/etc/squid/squid.conf
     networks:
       - ssrf_proxy_network
       - default
@@ -528,26 +528,26 @@ services:
   #     interval: 1s
   #     timeout: 3s
   #     retries: 30
-  
-#  open-webui:
-#    image: ghcr.io/open-webui/open-webui:cuda
-#    container_name: open-webui
-#    restart: always
-#    volumes:
-#      - "/home/zhangjunye/open-webui/:/app/backend/data"
-#    ports:
-#      - 3001:8080
-#    environment:
-#      - OLLAMA_BASE_URL=http://host.docker.internal:11434
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              count: 8
-#              capabilities: [gpu]
-#    extra_hosts:
-#      - host.docker.internal:host-gateway
+
+  #  open-webui:
+  #    image: ghcr.io/open-webui/open-webui:cuda
+  #    container_name: open-webui
+  #    restart: always
+  #    volumes:
+  #      - "/home/zhangjunye/open-webui/:/app/backend/data"
+  #    ports:
+  #      - 3001:8080
+  #    environment:
+  #      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+  #    deploy:
+  #      resources:
+  #        reservations:
+  #          devices:
+  #            - driver: nvidia
+  #              count: 8
+  #              capabilities: [gpu]
+  #    extra_hosts:
+  #      - host.docker.internal:host-gateway
 
   # The nginx reverse proxy.
   # used for reverse proxying the API service and Web service.
@@ -555,19 +555,16 @@ services:
     image: nginx:latest
     restart: always
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/proxy.conf:/etc/nginx/proxy.conf
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - /home/prismer/certs:/etc/nginx/ssl
+      - /home/ec2-user/certs:/etc/nginx/ssl
     depends_on:
       - api
       - web
-#      - open-webui
+    #      - open-webui
     ports:
-      - "12345:80"
-      - "8443:8443"
       - "443:443"
-      - "301:301"
+      - "80:80"
+#      - "301:301"
 # notice: if you use windows-wsl2, postgres may not work properly due to the ntfs issue.you can use volumes to mount the data directory to the host.
 # volumes:
 #   postgres:
