@@ -556,7 +556,8 @@ services:
     restart: always
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - /home/ec2-user/certs:/etc/nginx/ssl
+      - /home/ubuntu/certs:/etc/nginx/certs
+      - /home/ubuntu/dify/nginx/log:/var/log/nginx
     depends_on:
       - api
       - web
